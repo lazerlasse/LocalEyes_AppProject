@@ -1,0 +1,111 @@
+﻿@model LocalEyesWebAPI.ViewModels.DashboardViewModel
+
+@{
+    ViewData["Title"] = "Kontrolpanel";
+}
+
+<div class="row">
+    <div class="row">
+        <div class="col-md-auto">
+            <h1>@ViewData["Title"]</h1>
+        </div>
+        <div class="col-md-auto">
+            <a class="btn btn-primary" asp-area="" asp-controller="Dashboard" asp-action="Create">Tilføj API</a>
+        </div>
+        <div class="col-md-auto">
+            <a class="btn btn-primary" asp-area="" asp-controller="SubscriberModels" asp-action="Create">Tilføj Modtager</a>
+        </div>
+        <div class="col-md-auto">
+            <a class="btn btn-primary" asp-area="Identity" asp-page="/Account/Register">Tilføj Bruger</a>
+        </div>
+    </div>
+    <hr />
+    <div class="row mb-2 mt-2">
+        <div class="col-md-12">
+            <h3>Pushover API´s</h3>
+        </div>
+    </div>
+    <div class="row mb-2 mt-2">
+        <table class="col-md-12 table">
+            <thead class="bg-primary text-black">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PushoverSenderAPI.FirstOrDefault().PushoverSenderName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PushoverSenderAPI.FirstOrDefault().PushoverSenderAPIKey)
+                    </th>
+                    <th>
+                        Handling
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.PushoverSenderAPI)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PushoverSenderName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PushoverSenderAPIKey)
+                        </td>
+                        <td>
+                            <a asp-area="" asp-controller="Dashboard" asp-action="Edit" asp-route-id="@item.PushoverSenderAPIID">Rediger</a> |
+                            <a asp-area="" asp-controller="Dashboard" asp-action="Delete" asp-route-id="@item.PushoverSenderAPIID">Slet</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <hr />
+    </div>
+
+
+    <div class="row mb-2 mt-2">
+        <div class="col-md-12">
+            <h3>Besked Modtagere</h3>
+        </div>
+    </div>
+
+    <div class="row mb-2 mt-2">
+        <table class="col-md-12 table">
+            <thead class="bg-primary text-black">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Subscriber.FirstOrDefault().SubscriberName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Subscriber.FirstOrDefault().SubscriberPushoverKey)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Subscriber.FirstOrDefault().SubscriberEnabled)
+                    </th>
+                    <th>
+                        Handling
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Subscriber)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SubscriberName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SubscriberPushoverKey)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SubscriberEnabled)
+                        </td>
+                        <td>
+                            <a asp-area="" asp-controller="SubscriberModels" asp-action="Edit" asp-route-id="@item.SubscriberModelID">Rediger</a> |
+                            <a asp-area="" asp-controller="SubscriberModels" asp-action="Delete" asp-route-id="@item.SubscriberModelID">Slet</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

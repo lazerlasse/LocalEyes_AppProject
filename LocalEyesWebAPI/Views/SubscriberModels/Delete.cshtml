@@ -1,0 +1,36 @@
+﻿@model LocalEyesWebAPI.Models.SubscriberModel
+
+@{
+    ViewData["Title"] = "Slet modtager";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<h3>Er du sikker på du ønsker at slette denne modtager? Handlingen kan ikke fortrydes!</h3>
+
+<hr />
+
+<div>
+    <h4>Modtager</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SubscriberName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SubscriberName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SubscriberPushoverKey)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SubscriberPushoverKey)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="SubscriberModelID" />
+        <input type="submit" value="Slet" class="btn btn-danger" /> |
+        <a class="btn btn-primary" asp-area="" asp-controller="Dashboard" asp-action="Index">Fortryd</a>
+    </form>
+</div>

@@ -1,0 +1,36 @@
+﻿@model LocalEyesWebAPI.Models.PushoverSenderAPIModel
+
+@{
+    ViewData["Title"] = "Tilføj Pusover API";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="PushoverSenderName" class="control-label"></label>
+                <input asp-for="PushoverSenderName" class="form-control" />
+                <span asp-validation-for="PushoverSenderName" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-2">
+                <label asp-for="PushoverSenderAPIKey" class="control-label"></label>
+                <input asp-for="PushoverSenderAPIKey" class="form-control" />
+                <span asp-validation-for="PushoverSenderAPIKey" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-3">
+                <input type="submit" value="Gem" class="btn btn-primary" />
+                <a class="btn btn-danger" asp-action="Index">Fortryd</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

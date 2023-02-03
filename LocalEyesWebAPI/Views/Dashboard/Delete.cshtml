@@ -1,0 +1,33 @@
+﻿@model LocalEyesWebAPI.Models.PushoverSenderAPIModel
+
+@{
+    ViewData["Title"] = "Slet Pushover API";
+}
+
+<h1>@ViewData["Title"]</h1>
+<h4>Er du sikker på at du ønsker at slette denne Pushover API? Handlingen kan ikke fortrydes!</h4>
+
+<hr />
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PushoverSenderName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PushoverSenderName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PushoverSenderAPIKey)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PushoverSenderAPIKey)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="PushoverSenderAPIID" />
+        <input type="submit" value="Slet" class="btn btn-danger" /> |
+        <a class="btn btn-primary" asp-action="Index">Fortryd</a>
+    </form>
+</div>

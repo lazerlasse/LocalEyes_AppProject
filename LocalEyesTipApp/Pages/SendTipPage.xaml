@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LocalEyesTipApp.Pages.SendTipPage"
+             Title="Send Tip!">
+
+    <ScrollView>
+        <Grid Margin="10,10,10,10" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="*">
+            <TableView Intent="Data" Grid.Row="0" Grid.Column="0">
+                <TableRoot>
+                    <TableSection Title="Emne:" >
+                        <EntryCell Keyboard="Text" Text="{Binding Path=MessageModel.Title}" Placeholder="Hvad drejer din henvendelse om?" />
+                    </TableSection>
+                </TableRoot>
+            </TableView>
+            <TableView Intent="Data" Grid.Row="1" Grid.Column="0" HorizontalOptions="Fill" VerticalOptions="FillAndExpand">
+                <TableRoot>
+                    <TableSection Title="Beskrivelse:">
+                        <EntryCell Keyboard="Text" Text="{Binding Path=MessageModel.Description}" Placeholder="Beskriv kort hvad, hvor, hvornår?" />
+                    </TableSection>
+                </TableRoot>
+            </TableView>
+            <TableView Intent="Data" Grid.Row="2" Grid.Column="0" HorizontalOptions="Fill" VerticalOptions="FillAndExpand">
+                <TableRoot>
+                    <TableSection Title="Adresse:">
+                        <EntryCell Keyboard="Text" Text="{Binding Path=MessageModel.Address}" Placeholder="Hvor er hændelsen sket?" />
+                    </TableSection>
+                </TableRoot>
+            </TableView>
+            <TableView Intent="Data" Grid.Row="3" Grid.Column="0">
+                <TableRoot>
+                    <TableSection Title="Kontakt Nummer:">
+                        <EntryCell Keyboard="Telephone" Text="{Binding Path=MessageModel.ReplyPhoneNumber}" Placeholder="Eventuelt nummer du kan kontaktes på." />
+                    </TableSection>
+                </TableRoot>
+            </TableView>
+            <TableView Intent="Data" Grid.Row="4" Grid.Column="0">
+                <TableRoot>
+                    <TableSection Title="Kontakt Email:">
+                        <EntryCell Keyboard="Email" Text="{Binding Path=MessageModel.ReplyMail}" Placeholder="Eventuelt mail du kan kontaktes på." />
+                    </TableSection>
+                </TableRoot>
+            </TableView>
+            <TableView Intent="Data" Grid.Row="5" Grid.Column="0">
+                <TableRoot>
+                    <TableSection Title="Vedhæftet fil:">
+                        <TextCell Text="{Binding Path=MessageModel.MediaFile.FileName}" />
+                    </TableSection>
+                </TableRoot>
+            </TableView>
+            <Button Grid.Row="6" Grid.Column="0" HorizontalOptions="Fill" VerticalOptions="Center" Margin="5" Text="Vedhæft billede" Clicked="OnUploadImageButton_Clicked"  />
+            <Button Grid.Row="7" Grid.Column="0" HorizontalOptions="Fill" VerticalOptions="Center" Margin="5" Text="Send Tip" Clicked="OnSendBtnClicked" />
+        </Grid>
+    </ScrollView>
+</ContentPage>

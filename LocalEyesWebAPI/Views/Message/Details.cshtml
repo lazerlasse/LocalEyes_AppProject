@@ -1,0 +1,54 @@
+﻿@model LocalEyesWebAPI.Models.Message
+
+@{
+    ViewData["Title"] = "Besked detaljer";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<hr />
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MessageID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MessageID)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Created)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Created)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MessageText)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MessageText)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ReplyPhoneNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ReplyPhoneNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ReplyMail)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ReplyMail)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a class="btn btn-primary" asp-action="Index">Oversigt</a>
+    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@Model.MessageID">Slet</a>
+</div>

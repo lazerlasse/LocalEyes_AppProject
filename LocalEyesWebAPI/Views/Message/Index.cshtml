@@ -1,0 +1,61 @@
+﻿@model IEnumerable<LocalEyesWebAPI.Models.Message>
+
+@{
+    ViewData["Title"] = "Beskeder";
+}
+
+<div class="row">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>@ViewData["Title"]</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table">
+                <thead class="bg-primary text-black">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Created)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Address)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ReplyPhoneNumber)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ReplyMail)
+                        </th>
+                        <th>
+                            Handling
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Created)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Address)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ReplyPhoneNumber)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ReplyMail)
+                            </td>
+                            <td>
+                                <a asp-action="Details" asp-route-id="@item.MessageID">Vis</a> |
+                                <a asp-action="Delete" asp-route-id="@item.MessageID">Slet</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

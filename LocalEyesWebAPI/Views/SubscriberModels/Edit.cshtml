@@ -1,0 +1,41 @@
+﻿@model LocalEyesWebAPI.Models.SubscriberModel
+
+@{
+    ViewData["Title"] = "Rediger modtager";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="SubscriberModelID" />
+            <div class="form-group">
+                <label asp-for="SubscriberName" class="control-label"></label>
+                <input asp-for="SubscriberName" class="form-control" />
+                <span asp-validation-for="SubscriberName" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-2">
+                <label asp-for="SubscriberPushoverKey" class="control-label"></label>
+                <input asp-for="SubscriberPushoverKey" class="form-control" />
+                <span asp-validation-for="SubscriberPushoverKey" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check mt-2">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="SubscriberEnabled" /> @Html.DisplayNameFor(model => model.SubscriberEnabled)
+                </label>
+            </div>
+            <div class="form-group mt-2">
+                <input type="submit" value="Gem ændringer" class="btn btn-primary" />
+                <a class="btn btn-danger" asp-area="" asp-controller="Dashboard" asp-action="Index">Fortryd</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
