@@ -5,51 +5,25 @@
              Title="Send Tip!">
 
     <ScrollView>
-        <Grid Margin="10,10,10,10" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="*">
-            <TableView Intent="Data" Grid.Row="0" Grid.Column="0">
-                <TableRoot>
-                    <TableSection Title="Emne:" >
-                        <EntryCell Keyboard="Text" Text="{Binding Path=MessageModel.Title}" Placeholder="Hvad drejer din henvendelse om?" />
-                    </TableSection>
-                </TableRoot>
-            </TableView>
-            <TableView Intent="Data" Grid.Row="1" Grid.Column="0" HorizontalOptions="Fill" VerticalOptions="FillAndExpand">
-                <TableRoot>
-                    <TableSection Title="Beskrivelse:">
-                        <EntryCell Keyboard="Text" Text="{Binding Path=MessageModel.Description}" Placeholder="Beskriv kort hvad, hvor, hvornår?" />
-                    </TableSection>
-                </TableRoot>
-            </TableView>
-            <TableView Intent="Data" Grid.Row="2" Grid.Column="0" HorizontalOptions="Fill" VerticalOptions="FillAndExpand">
-                <TableRoot>
-                    <TableSection Title="Adresse:">
-                        <EntryCell Keyboard="Text" Text="{Binding Path=MessageModel.Address}" Placeholder="Hvor er hændelsen sket?" />
-                    </TableSection>
-                </TableRoot>
-            </TableView>
-            <TableView Intent="Data" Grid.Row="3" Grid.Column="0">
-                <TableRoot>
-                    <TableSection Title="Kontakt Nummer:">
-                        <EntryCell Keyboard="Telephone" Text="{Binding Path=MessageModel.ReplyPhoneNumber}" Placeholder="Eventuelt nummer du kan kontaktes på." />
-                    </TableSection>
-                </TableRoot>
-            </TableView>
-            <TableView Intent="Data" Grid.Row="4" Grid.Column="0">
-                <TableRoot>
-                    <TableSection Title="Kontakt Email:">
-                        <EntryCell Keyboard="Email" Text="{Binding Path=MessageModel.ReplyMail}" Placeholder="Eventuelt mail du kan kontaktes på." />
-                    </TableSection>
-                </TableRoot>
-            </TableView>
-            <TableView Intent="Data" Grid.Row="5" Grid.Column="0">
-                <TableRoot>
-                    <TableSection Title="Vedhæftet fil:">
-                        <TextCell Text="{Binding Path=MessageModel.MediaFile.FileName}" />
-                    </TableSection>
-                </TableRoot>
-            </TableView>
-            <Button Grid.Row="6" Grid.Column="0" HorizontalOptions="Fill" VerticalOptions="Center" Margin="5" Text="Vedhæft billede" Clicked="OnUploadImageButton_Clicked"  />
-            <Button Grid.Row="7" Grid.Column="0" HorizontalOptions="Fill" VerticalOptions="Center" Margin="5" Text="Send Tip" Clicked="OnSendBtnClicked" />
+        <Grid Margin="10,10,10,10" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="*">
+            <Label Text="Tip:" SemanticProperties.HeadingLevel="Level2" FontSize="Title" Grid.Row="0" Grid.Column="0" />
+            <Editor Keyboard="Text" FontSize="Body" Grid.Row="1" Grid.Column="0" Text="{Binding Path=MessageModel.MessageText}" Placeholder="Beskriv kort hvad, hvor, hvornår?" AutoSize="TextChanges" />
+            
+            <Label Text="Adresse:" SemanticProperties.HeadingLevel="Level2" FontSize="Title" Grid.Row="2" Grid.Column="0" FontAutoScalingEnabled="True" />
+            <Editor Keyboard="Text" FontSize="Body" Grid.Row="3" Grid.Column="0" HorizontalOptions="Fill" Text="{Binding Path=MessageModel.Address}" Placeholder="Hvor er hændelsen sket?" AutoSize="TextChanges" />
+            
+            <Label Text="Kontakt Nummer:" SemanticProperties.HeadingLevel="Level2" FontSize="Title" Grid.Row="4" Grid.Column="0" FontAutoScalingEnabled="True" />
+            <Editor Keyboard="Telephone" FontSize="Body" Grid.Row="5" Grid.Column="0" Text="{Binding Path=MessageModel.ReplyPhoneNumber}" Placeholder="Eventuelt nummer du kan kontaktes på." MaxLength="8" />
+
+            <Label Text="Kontakt Email:" SemanticProperties.HeadingLevel="Level2" FontSize="Title" Grid.Row="6" Grid.Column="0" FontAutoScalingEnabled="True" />
+            <Entry Keyboard="Email" FontSize="Body" Grid.Row="7" Grid.Column="0" Text="{Binding Path=MessageModel.ReplyMail}" Placeholder="Eventuelt mail du kan kontaktes på." />
+
+            <Label Text="Vedhæftede filer:" SemanticProperties.HeadingLevel="Level2" FontSize="Title" Grid.Row="8" Grid.Column="0" />
+            <ListView x:Name="filesListView" Grid.Row="9" Grid.Column="0">
+            </ListView>
+            
+            <Button FontSize="Title" Grid.Row="10" Grid.Column="0" HorizontalOptions="Fill" VerticalOptions="Center" Margin="5" Text="Vedhæft billeder/videoer" Clicked="OnAddFilesButton_Clicked" />
+            <Button FontSize="Title" Grid.Row="11" Grid.Column="0" HorizontalOptions="Fill" VerticalOptions="Center" Margin="5" Text="Send Tip" Clicked="OnSendBtnClicked" />
         </Grid>
     </ScrollView>
 </ContentPage>

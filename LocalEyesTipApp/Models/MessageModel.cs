@@ -10,12 +10,11 @@ namespace LocalEyesTipApp.Models
     {
         // Private properties...
         private int messageId;
-        private string title;
-        private string description;
+        private string messageText;
         private string address;
         private int? replyPhoneNumber;
         private string? replyMail;
-        private FileResult mediaFile;
+        private IEnumerable<FileResult> mediaFiles;
 
 
         // Public properties...
@@ -32,29 +31,16 @@ namespace LocalEyesTipApp.Models
             }
         }
 
-        public string Title
+        public string MessageText
         {
-            get => title;
+            get => messageText;
             set
             {
-                if (title == value)
+                if (messageText == value)
                     return;
 
-                title = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Title)));
-            }
-        }
-
-        public string Description
-        {
-            get => description;
-            set
-            {
-                if (description == value)
-                    return;
-
-                description = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Description)));
+                messageText = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(MessageText)));
             }
         }
 
@@ -97,16 +83,16 @@ namespace LocalEyesTipApp.Models
             }
         }
 
-        public FileResult MediaFile
+        public IEnumerable<FileResult> MediaFiles
         {
-            get => mediaFile;
+            get => mediaFiles;
             set
             {
-                if (mediaFile == value)
+                if (mediaFiles == value)
                     return;
 
-                mediaFile = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(MediaFile)));
+                mediaFiles = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(MediaFiles)));
             }
         }
 

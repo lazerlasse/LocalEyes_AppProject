@@ -61,9 +61,9 @@ public partial class SendTipPage : ContentPage
         }
     }
 
-    private async void OnUploadImageButton_Clicked(object sender, EventArgs e)
+    private async void OnAddFilesButton_Clicked(object sender, EventArgs e)
     {
-        MessageModel.MediaFile = await FilePicker.PickAsync(new PickOptions
+        MessageModel.MediaFiles = await FilePicker.PickMultipleAsync(new PickOptions
         {
             PickerTitle = "Vælg billede eller video",
             FileTypes = new FilePickerFileType(new Dictionary<DevicePlatform, IEnumerable<string>>
@@ -72,5 +72,14 @@ public partial class SendTipPage : ContentPage
                 { DevicePlatform.Android, new[] { "image/jpeg", "video/mp4",  } }
             })
         });
+
+        List<string> files = new();
+
+        foreach (var file in MessageModel.MediaFiles)
+        {
+            files.Add(file.FileName);
+        }
+
+        filesListView.ItemsSource = files;
     }
 }

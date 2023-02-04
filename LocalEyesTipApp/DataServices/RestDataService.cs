@@ -52,8 +52,7 @@ namespace LocalEyesTipApp.DataServices
 
                 using var content = new MultipartFormDataContent
                 {
-                    { new StringContent(message.Title), nameof(MessageModel.Title) },
-                    { new StringContent(message.Description), nameof(MessageModel.Description) },
+                    { new StringContent(message.MessageText), nameof(MessageModel.MessageText) },
                     { new StringContent(message.Address) , nameof(MessageModel.Address) }
                 };
 
@@ -83,9 +82,13 @@ namespace LocalEyesTipApp.DataServices
 
 
                 // Check if media file is null.
-                if (message.MediaFile != null)
+                if (message.MediaFiles != null)
                 {
-                    content.Add(new StreamContent(await message.MediaFile.OpenReadAsync()), nameof(MessageModel.MediaFile), message.MediaFile.FileName);
+                    foreach (var file in message.MediaFiles)
+                    {
+                        var streamContent = new StreamContent(await file.OpenReadAsync());
+                        content.Add(streamContent, nameof(MessageModel.MediaFiles), file.FileName);
+                    }
                 }
 
                 request.Content = content;
