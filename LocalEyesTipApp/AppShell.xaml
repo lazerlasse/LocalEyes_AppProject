@@ -8,7 +8,7 @@
 
     <ShellContent
         Title="Local Eyes"
-        ContentTemplate="{DataTemplate local:MainPage}"
+        ContentTemplate="{DataTemplate local:}"
         Route="MainPage" />
 
 </Shell>

@@ -19,7 +19,7 @@ namespace LocalEyesTipApp
 
             builder.Services.AddSingleton<IRestDataService, RestDataService>();
 
-            builder.Services.AddSingleton<MainPage>();
+            builder.Services.AddSingleton<LatestNewsPage>();
             builder.Services.AddTransient<SendTipPage>();
 
             return builder.Build();
