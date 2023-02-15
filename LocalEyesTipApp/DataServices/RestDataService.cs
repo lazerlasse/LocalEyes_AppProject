@@ -17,32 +17,28 @@ namespace LocalEyesTipApp.DataServices
     class RestDataService : IRestDataService
     {
         private readonly HttpClient _httpClient;
-        private readonly JsonSerializerOptions _jsonSerializerOptions;
         private static readonly string _baseAddress = "https://app.localeyes.dk";
-        private static readonly string _messageAPIUrl = $"{_baseAddress}/api/messageAPI/";
 
         public RestDataService()
         {
 #if DEBUG
-            HttpsClientHandlerService handler = new HttpsClientHandlerService();
-            _httpClient = new HttpClient(handler.GetPlatformMessageHandler());
-            _httpClient.BaseAddress = new Uri(_baseAddress);
-#else
-            _httpClient = new HttpClient();
-            _httpClient.BaseAddress = new Uri(_baseAddress);
-#endif
-
-            _jsonSerializerOptions = new JsonSerializerOptions
+            HttpsClientHandlerService handler = new();
+            _httpClient = new HttpClient(handler.GetPlatformMessageHandler())
             {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                BaseAddress = new Uri(_baseAddress)
             };
+#else
+            _httpClient = new HttpClient()
+            {
+                BaseAddress = new Uri(_baseAddress)
+            };
+#endif
         }
 
         public async Task<SendTipReturnMessageModel> SendTipAsync(MessageModel message)
         {
             if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
             {
-                Debug.WriteLine("------> Ingen internet adgang...");
                 return new() { Succeded = false, Message = "Der er ikke forbindelse til internettet!" };
             }
 
@@ -72,7 +68,7 @@ namespace LocalEyesTipApp.DataServices
                 // Check if mail is null.
                 if (message.ReplyMail == null)
                 {
-                    content.Add(new StringContent(""), nameof(MessageModel.ReplyMail));
+                    content.Add(new StringContent(string.Empty), nameof(MessageModel.ReplyMail));
                 }
                 else
                 {
@@ -97,18 +93,15 @@ namespace LocalEyesTipApp.DataServices
 
                 if (result.IsSuccessStatusCode)
                 {
-                    Debug.WriteLine($"Beskeden blev sendt: {result.Headers}");
                     return new() { Succeded = true, Message = $"Beskeden blev sendt: {result.Headers}" };
                 }
                 else
                 {
-                    Debug.WriteLine($"Der opstod en fejl: {result.Headers}");
                     return new() { Succeded = false, Message = $"Der opstod en fejl: {result.Headers}" };
                 }
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Der opstod en uventet fejl: {ex.Message}");
                 return new() { Succeded = false, Message = $"Der opstod en uventet fejl: {ex.Message}" };
             }
         }

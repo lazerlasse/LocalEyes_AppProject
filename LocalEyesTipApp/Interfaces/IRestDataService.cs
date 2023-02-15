@@ -9,6 +9,6 @@ namespace LocalEyesTipApp.Interfaces
 {
     public interface IRestDataService
     {
-        Task<SendTipReturnMessageModel> SendTipAsync(MessageModel messageModel);
+        Task<SendTipReturnMessageModel> SendTipAsync(MessageModel message);
     }
 }

@@ -8,7 +8,9 @@ namespace LocalEyesTipApp
         {
             InitializeComponent();
 
+            Routing.RegisterRoute(nameof(LatestNewsPage), typeof(LatestNewsPage));
             Routing.RegisterRoute(nameof(SendTipPage), typeof(SendTipPage));
+            Routing.RegisterRoute(nameof(AboutPage), typeof(AboutPage));
         }
     }
 }

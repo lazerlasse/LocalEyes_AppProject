@@ -8,5 +8,70 @@
         <ToolbarItem Text="Send Tip!" Clicked="OnSendTipBtnClicked" />
     </ContentPage.ToolbarItems>
 
-    <WebView Source="https://localeyes.dk/category/agency/" VerticalOptions="Fill" HorizontalOptions="Fill" />
+    <Grid RowDefinitions="Auto,*,Auto" ColumnDefinitions="*,*,*,*" Margin="10">
+        <!--Loading label should not render by default.-->
+        <Label
+            x:Name="labelLoading"
+            Margin="0,0,0,10"
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.ColumnSpan="4"
+            Text="Indlæser..."
+            IsVisible="false"
+            HorizontalTextAlignment="Center"
+            FontAttributes="Bold"
+            FontSize="Medium" />
+        
+        <RefreshView
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="4"
+            Margin="0,0,0,10"
+            IsRefreshing="{Binding Path=IsRefreshing}"
+            Command="{Binding Path=RefreshCommand}">
+            
+            <WebView
+                x:Name="LocaleyesLatestNewsWebView"
+                Navigating="WebView_Navigating"
+                Navigated="WebView_Navigated"
+                VerticalOptions="FillAndExpand"
+                HorizontalOptions="Center" />
+        </RefreshView>
+
+        <ImageButton
+            x:Name="backNavigationButton"
+            Grid.Row="2"
+            Grid.Column="0"
+            Clicked="OnBackButtonClicked"
+            HeightRequest="30"
+            WidthRequest="30"
+            Source="arrow_left_solid.svg" />
+
+        <ImageButton
+            x:Name="HomeNavigationButton"
+            Grid.Row="2"
+            Grid.Column="1"
+            Clicked="OnHomeNavigationButton_Clicked"
+            HeightRequest="30"
+            WidthRequest="30"
+            Source="house_solid.svg" />
+
+        <ImageButton
+            x:Name="RefreshNavigationButton"
+            Grid.Row="2"
+            Grid.Column="2"
+            Command="{Binding Path=RefreshCommand}"
+            HeightRequest="30"
+            WidthRequest="30"
+            Source="rotate_right_solid.svg" />
+
+        <ImageButton
+            x:Name="forwardNavigationButton"
+            Grid.Row="2"
+            Grid.Column="3"
+            Clicked="OnForwardButtonClicked"
+            HeightRequest="30"
+            WidthRequest="30"
+            Source="arrow_right_solid.svg"/>
+    </Grid>
 </ContentPage>

@@ -37,6 +37,8 @@ namespace LocalEyesWebAPI.Controllers
 
         // POST: api/MessageAPIController/SendMessage
         [HttpPost]
+        [RequestFormLimits(MultipartBodyLengthLimit = 1073741824)]
+        [RequestSizeLimit(1073741824)]
         public async Task<IActionResult> SendMessage([FromForm] RecievedMessageModel messageRecieved)
         {
             // Create a string builder to build the final message to send.

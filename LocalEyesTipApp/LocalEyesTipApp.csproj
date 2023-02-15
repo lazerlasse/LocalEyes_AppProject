@@ -19,8 +19,8 @@
 		<ApplicationIdGuid>ce5ee6c2-6560-40a0-9175-46243d0da9a0</ApplicationIdGuid>
 
 		<!-- Versions -->
-		<ApplicationDisplayVersion>1.1</ApplicationDisplayVersion>
-		<ApplicationVersion>2</ApplicationVersion>
+		<ApplicationDisplayVersion>1.2</ApplicationDisplayVersion>
+		<ApplicationVersion>3</ApplicationVersion>
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">14.0</SupportedOSPlatformVersion>
@@ -36,7 +36,7 @@
 		<MauiIcon Include="Resources\AppIcon\localeyes_icon.png" ForegroundFile="Resources\AppIcon\localeyes_logo.png" Color="#512BD4" />
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.png" Color="#FF0000" BaseSize="128,128" />
+		<MauiSplashScreen Include="Resources\Splash\splash.png" Color="#291fed" BaseSize="128,128" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
@@ -50,7 +50,34 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiFont Remove="Resources\Fonts\Fa-Brands-Regular-400.otf" />
+	  <MauiFont Remove="Resources\Fonts\Fa-Regular-400.otf" />
+	  <MauiFont Remove="Resources\Fonts\Fa-Solid-900.otf" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="Resources\Images\arrow_left_solid.svg" />
+	  <None Remove="Resources\Images\arrow_right_solid.svg" />
+	  <None Remove="Resources\Images\circle_info_solid.svg" />
+	  <None Remove="Resources\Images\email_icon.png" />
+	  <None Remove="Resources\Images\envelope_solid.svg" />
+	  <None Remove="Resources\Images\files_icon.png" />
+	  <None Remove="Resources\Images\house_solid.svg" />
+	  <None Remove="Resources\Images\location_icon.png" />
+	  <None Remove="Resources\Images\message_text_icon.png" />
+	  <None Remove="Resources\Images\phone_icon.png" />
+	  <None Remove="Resources\Images\rotate_right_solid.svg" />
+	  <None Remove="Resources\Images\square_rss_solid.svg" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <Content Include="favicon.ico" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Include="Resources\Fonts\Fa-Brands-Regular-400.otf" />
+	  <EmbeddedResource Include="Resources\Fonts\Fa-Regular-400.otf" />
+	  <EmbeddedResource Include="Resources\Fonts\Fa-Solid-900.otf" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -59,6 +86,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <PackageReference Include="CommunityToolkit.Maui" Version="2.0.0" />
 	  <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
 	  <PackageReference Include="System.ServiceModel.Syndication" Version="7.0.0" />
 	</ItemGroup>
@@ -79,12 +107,19 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Pages\AboutPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\LatestNewsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\SendTipPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="ViewModels\" />
 	</ItemGroup>
 
 </Project>
