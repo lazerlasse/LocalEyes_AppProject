@@ -12,15 +12,15 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 
 		<!-- Display name -->
-		<ApplicationTitle>LocalEyesTipApp</ApplicationTitle>
+		<ApplicationTitle>Local Eyes App</ApplicationTitle>
 
 		<!-- App Identifier -->
 		<ApplicationId>com.companyname.localeyestipapp</ApplicationId>
 		<ApplicationIdGuid>ce5ee6c2-6560-40a0-9175-46243d0da9a0</ApplicationIdGuid>
 
 		<!-- Versions -->
-		<ApplicationDisplayVersion>1.2</ApplicationDisplayVersion>
-		<ApplicationVersion>3</ApplicationVersion>
+		<ApplicationDisplayVersion>1.3</ApplicationDisplayVersion>
+		<ApplicationVersion>4</ApplicationVersion>
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">14.0</SupportedOSPlatformVersion>
@@ -28,12 +28,11 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
-		<ApplicationIcon>favicon.ico</ApplicationIcon>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\localeyes_icon.png" ForegroundFile="Resources\AppIcon\localeyes_logo.png" Color="#512BD4" />
+		<MauiIcon Include="Resources\AppIcon\appicon.png" ForegroundFile="Resources\AppIcon\appiconfg.png" Color="#2336F2" />
 
 		<!-- Splash Screen -->
 		<MauiSplashScreen Include="Resources\Splash\splash.png" Color="#291fed" BaseSize="128,128" />
@@ -50,38 +49,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiFont Remove="Resources\Fonts\Fa-Brands-Regular-400.otf" />
-	  <MauiFont Remove="Resources\Fonts\Fa-Regular-400.otf" />
-	  <MauiFont Remove="Resources\Fonts\Fa-Solid-900.otf" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <None Remove="Resources\Images\arrow_left_solid.svg" />
-	  <None Remove="Resources\Images\arrow_right_solid.svg" />
-	  <None Remove="Resources\Images\circle_info_solid.svg" />
-	  <None Remove="Resources\Images\email_icon.png" />
-	  <None Remove="Resources\Images\envelope_solid.svg" />
-	  <None Remove="Resources\Images\files_icon.png" />
-	  <None Remove="Resources\Images\house_solid.svg" />
-	  <None Remove="Resources\Images\location_icon.png" />
-	  <None Remove="Resources\Images\message_text_icon.png" />
-	  <None Remove="Resources\Images\phone_icon.png" />
-	  <None Remove="Resources\Images\rotate_right_solid.svg" />
-	  <None Remove="Resources\Images\square_rss_solid.svg" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Content Include="favicon.ico" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <EmbeddedResource Include="Resources\Fonts\Fa-Brands-Regular-400.otf" />
 	  <EmbeddedResource Include="Resources\Fonts\Fa-Regular-400.otf" />
 	  <EmbeddedResource Include="Resources\Fonts\Fa-Solid-900.otf" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiImage Include="Resources\AppIcon\localeyes_logo.png" />
+	  <MauiImage Include="Resources\AppIcon\appiconfg.png" />
 	  <MauiImage Include="Resources\Splash\splash.png" />
 	</ItemGroup>
 
