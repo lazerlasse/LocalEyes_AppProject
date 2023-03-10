@@ -14,9 +14,6 @@ namespace LocalEyesTipApp
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                fonts.AddFont("Fa-Brands-Regular-400.otf", "FontBrandsRegular");
-                fonts.AddFont("Fa-Regular-400.otf", "FontRegular");
-                fonts.AddFont("Fa-Solid-900.otf", "FontSolid");
             }).UseMauiCommunityToolkit();
 
 
