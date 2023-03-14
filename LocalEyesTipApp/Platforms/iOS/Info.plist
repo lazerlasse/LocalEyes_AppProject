@@ -29,7 +29,7 @@
 	<key>CFBundleIdentifier</key>
 	<string>com.companyname.localeyestipapp</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.3</string>
+	<string>1.3.1</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
@@ -41,5 +41,7 @@
 		<key>Enable Multiple Windows</key>
 		<true/>
 	</dict>
+	<key>MinimumOSVersion</key>
+	<string>16.2</string>
 </dict>
 </plist>
