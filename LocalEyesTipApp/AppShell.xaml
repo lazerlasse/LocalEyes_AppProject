@@ -10,15 +10,15 @@
         Title="Senest Nyt"
         ContentTemplate="{DataTemplate pages:LatestNewsPage}"
         Route="LatestNewsPage" 
-        Icon="square_rss_solid.svg"/>
+        Icon="square_rss_solid"/>
 
-    <FlyoutItem Icon="envelope_solid.svg" Title="Send Tip">
+    <FlyoutItem Icon="envelope_solid" Title="Send Tip">
         <Tab>
             <ShellContent ContentTemplate="{DataTemplate pages:SendTipPage}" />
         </Tab>
     </FlyoutItem>
 
-    <FlyoutItem Icon="circle_info_solid.svg" Title="Om Appen">
+    <FlyoutItem Icon="circle_info_solid" Title="Om Appen">
         <Tab>
             <ShellContent ContentTemplate="{DataTemplate pages:AboutPage}" />
         </Tab>

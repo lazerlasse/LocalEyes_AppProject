@@ -13,7 +13,7 @@ namespace LocalEyesTipApp.Models
         private string messageText;
         private string address;
         private int? replyPhoneNumber;
-        private string? replyMail;
+        private string replyMail;
         private IEnumerable<FileResult> mediaFiles;
 
 
@@ -70,7 +70,7 @@ namespace LocalEyesTipApp.Models
             }
         }
 
-        public string? ReplyMail
+        public string ReplyMail
         {
             get => replyMail;
             set

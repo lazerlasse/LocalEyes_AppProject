@@ -35,7 +35,9 @@
                 Navigating="WebView_Navigating"
                 Navigated="WebView_Navigated"
                 VerticalOptions="FillAndExpand"
-                HorizontalOptions="Center" />
+                HorizontalOptions="Fill"
+                MinimumHeightRequest="800"
+                MinimumWidthRequest="400"/>
         </RefreshView>
 
         <ImageButton
@@ -45,7 +47,7 @@
             Clicked="OnBackButtonClicked"
             HeightRequest="30"
             WidthRequest="30"
-            Source="arrow_left_solid.svg" />
+            Source="arrow_left_solid" />
 
         <ImageButton
             x:Name="HomeNavigationButton"
@@ -54,7 +56,7 @@
             Clicked="OnHomeNavigationButton_Clicked"
             HeightRequest="30"
             WidthRequest="30"
-            Source="house_solid.svg" />
+            Source="house_solid" />
 
         <ImageButton
             x:Name="RefreshNavigationButton"
@@ -63,7 +65,7 @@
             Command="{Binding Path=RefreshCommand}"
             HeightRequest="30"
             WidthRequest="30"
-            Source="rotate_right_solid.svg" />
+            Source="rotate_right_solid" />
 
         <ImageButton
             x:Name="forwardNavigationButton"
@@ -72,6 +74,6 @@
             Clicked="OnForwardButtonClicked"
             HeightRequest="30"
             WidthRequest="30"
-            Source="arrow_right_solid.svg"/>
+            Source="arrow_right_solid"/>
     </Grid>
 </ContentPage>

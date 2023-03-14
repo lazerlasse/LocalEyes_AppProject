@@ -30,14 +30,6 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="$(TargetFramework.Contains('-ios')) and '$(Configuration)' == 'Release'">
-		<RuntimeIdentifier>ios-arm64</RuntimeIdentifier>
-		<!-- Only needed when you have a need for entitlements -->
-		<CodesignEntitlement>Entitlements.plist</CodesignEntitlement>
-		<CodesignKey>Apple Development: Lasse Antonsen (V9942H35Y7)</CodesignKey>
-		<CodesignProvision>MacDeveloperProvisioningProfile</CodesignProvision>
-	</PropertyGroup>
-
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0-android|AnyCPU'">
 	  <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
 	</PropertyGroup>
@@ -129,5 +121,13 @@
 	<ItemGroup>
 	  <Folder Include="ViewModels\" />
 	</ItemGroup>
+
+	<PropertyGroup Condition="$(TargetFramework.Contains('-ios')) and '$(Configuration)' == 'Release'">
+		<RuntimeIdentifier>ios-arm64</RuntimeIdentifier>
+		<!-- Only needed when you have a need for entitlements -->
+		<!--<CodesignEntitlement>Entitlements.plist</CodesignEntitlement>-->
+		<CodesignKey>Apple Distribution: Lasse Antonsen (2KKRDW599H)</CodesignKey>
+		<CodesignProvision>LocalEyesAppSigning</CodesignProvision>
+	</PropertyGroup>
 
 </Project>
