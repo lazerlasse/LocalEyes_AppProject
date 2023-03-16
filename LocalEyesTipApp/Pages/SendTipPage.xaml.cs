@@ -14,6 +14,9 @@ namespace LocalEyesTipApp.Pages;
 [QueryProperty(nameof(Message), nameof(Message))]
 public partial class SendTipPage : ContentPage
 {
+    private readonly Button addPhotoButton;
+    private readonly Button addVideoButton;
+    //private readonly Button addFilesButton;
     private readonly IRestDataService _restDataService;
     private MessageModel _message;
 
@@ -25,6 +28,33 @@ public partial class SendTipPage : ContentPage
         _restDataService = dataService;
 
         BindingContext = this;
+
+        addPhotoButton = new()
+        {
+            StyleId = "addPhotoButton",
+            Text = "Tilføj Billede",
+            FontSize = 18
+        };
+        addPhotoButton.Clicked += OnAddPhotoButton_Clicked;
+        addfilesbuttongrid.Children.Add(addPhotoButton);
+
+        addVideoButton = new()
+        {
+            StyleId = "addVideoButton",
+            Text = "Tilføj Video",
+            FontSize = 18
+        };
+        addVideoButton.Clicked += OnAddVideoButton_Clicked;
+        addfilesbuttongrid.Children.Add(addVideoButton);
+
+        //addFilesButton = new()
+        //{
+        //    StyleId = "addFilesButton",
+        //    Text = "Tilføj Billeder/Videoer",
+        //    FontSize = 18
+        //};
+        //addFilesButton.Clicked += OnAddFilesButton_Clicked;
+        //addfilesbuttongrid.Children.Add(addFilesButton);
     }
 
     public MessageModel Message
@@ -85,32 +115,61 @@ public partial class SendTipPage : ContentPage
         }
     }
 
-    private async void OnAddFilesButton_Clicked(object sender, EventArgs e)
+    //private async void OnAddFilesButton_Clicked(object sender, EventArgs e)
+    //{
+    //    PickOptions options = new()
+    //    {
+    //        PickerTitle = "Vælg billeder og video"
+    //    };
+
+    //    Message.MediaFiles = await FilePicker.Default.PickMultipleAsync(options);
+
+
+    //    if (Message.MediaFiles == null)
+    //        return;
+
+    //    List<string> files = new();
+
+    //    foreach (var file in Message.MediaFiles)
+    //    {
+    //        files.Add(file.FileName);
+    //    }
+
+    //    filesListView.ItemsSource = files;
+    //}
+
+    private async void OnAddPhotoButton_Clicked(object sender, EventArgs e)
     {
-        Message.MediaFiles = await FilePicker.PickMultipleAsync(new PickOptions
-        {
-            PickerTitle = "Vælg billede eller video",
-            FileTypes = new FilePickerFileType(new Dictionary<DevicePlatform, IEnumerable<string>>
-            {
-                { DevicePlatform.iOS, new[] { "public.image", "public.video" } },
-                { DevicePlatform.Android, new[] { "image/jpeg", "video/mp4",  } }
-            })
-        });
+        var result = await MediaPicker.Default.PickPhotoAsync();
 
-        List<string> files = new();
 
-        foreach (var file in Message.MediaFiles)
-        {
-            files.Add(file.FileName);
-        }
+        if (result == null)
+            return;
 
-        filesListView.ItemsSource = files;
+        Message.MediaFiles.Append(result);
+
+        filesListView.ItemsSource = result.FileName;
+    }
+
+    private async void OnAddVideoButton_Clicked(object sender, EventArgs e)
+    {
+        var result = await MediaPicker.Default.PickVideoAsync();
+
+
+        if (result == null)
+            return;
+
+        Message.MediaFiles.Append(result);
+
+        filesListView.ItemsSource = result.FileName;
     }
 
     private void DisableButtonsAndEntries()
     {
         // Disable buttons and entries to prevent dubble posting issues.
-        addFilesButton.IsEnabled = false;
+        //addFilesButton.IsEnabled = false;
+        addPhotoButton.IsEnabled = false;
+        addVideoButton.IsEnabled = false;
         sendTipButton.IsEnabled = false;
         tipMessageEntry.IsEnabled = false;
         addressEntry.IsEnabled = false;
@@ -121,7 +180,9 @@ public partial class SendTipPage : ContentPage
     private void EnableButtonsAndEntries()
     {
         // Activate buttons and entries again.
-        addFilesButton.IsEnabled = true;
+        //addFilesButton.IsEnabled = true;
+        addPhotoButton.IsEnabled = true;
+        addVideoButton.IsEnabled = true;
         sendTipButton.IsEnabled = true;
         tipMessageEntry.IsEnabled = true;
         addressEntry.IsEnabled = true;

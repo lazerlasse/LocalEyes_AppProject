@@ -28,20 +28,14 @@
 	<string>This app needs access to photos gallery for picking photos and videos.</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.companyname.localeyestipapp</string>
-	<key>CFBundleShortVersionString</key>
-	<string>1.3.1</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
-	<key>Application Scene Manifest</key>
-	<dict>
-		<key>Scene Configuration</key>
-		<dict/>
-		<key>Enable Multiple Windows</key>
-		<true/>
-	</dict>
 	<key>MinimumOSVersion</key>
-	<string>16.2</string>
+	<string>14.2</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.3.2</string>
 </dict>
 </plist>

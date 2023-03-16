@@ -1,16 +1,5 @@
 ﻿using LocalEyesTipApp.Interfaces;
 using LocalEyesTipApp.Models;
-using LocalEyesTipApp.Services;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Net.Http;
-using System.ServiceModel.Syndication;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
-using System.Xml;
 
 namespace LocalEyesTipApp.DataServices
 {
@@ -19,20 +8,12 @@ namespace LocalEyesTipApp.DataServices
         private readonly HttpClient _httpClient;
         private static readonly string _baseAddress = "https://app.localeyes.dk";
 
-        public RestDataService()
+        public RestDataService(HttpMessageHandler messageHandler)
         {
-#if DEBUG
-            HttpsClientHandlerService handler = new();
-            _httpClient = new HttpClient(handler.GetPlatformMessageHandler())
+            _httpClient = new HttpClient(messageHandler)
             {
                 BaseAddress = new Uri(_baseAddress)
             };
-#else
-            _httpClient = new HttpClient()
-            {
-                BaseAddress = new Uri(_baseAddress)
-            };
-#endif
         }
 
         public async Task<SendTipReturnMessageModel> SendTipAsync(MessageModel message)
@@ -52,7 +33,6 @@ namespace LocalEyesTipApp.DataServices
                     { new StringContent(message.Address) , nameof(MessageModel.Address) }
                 };
 
-
                 // Check if phonenumber is null.
                 if (message.ReplyPhoneNumber == null)
                 {
@@ -63,8 +43,6 @@ namespace LocalEyesTipApp.DataServices
                     content.Add(new StringContent(message.ReplyPhoneNumber.ToString()), nameof(MessageModel.ReplyPhoneNumber));
                 }
 
-
-
                 // Check if mail is null.
                 if (message.ReplyMail == null)
                 {
@@ -74,8 +52,6 @@ namespace LocalEyesTipApp.DataServices
                 {
                     content.Add(new StringContent(message.ReplyMail), nameof(MessageModel.ReplyMail));
                 }
-
-
 
                 // Check if media file is null.
                 if (message.MediaFiles != null)
@@ -89,21 +65,26 @@ namespace LocalEyesTipApp.DataServices
 
                 request.Content = content;
 
-                var result = await _httpClient.SendAsync(request);
+                using var response = await _httpClient.SendAsync(request);
 
-                if (result.IsSuccessStatusCode)
+                if (response.IsSuccessStatusCode)
                 {
-                    return new() { Succeded = true, Message = $"Beskeden blev sendt: {result.Headers}" };
+                    return new() { Succeded = true, Message = $"Beskeden blev sendt: {response.Headers}" };
                 }
                 else
                 {
-                    return new() { Succeded = false, Message = $"Der opstod en fejl: {result.Headers}" };
+                    return new() { Succeded = false, Message = $"Der opstod en fejl: {response.Headers}" };
                 }
             }
             catch (Exception ex)
             {
                 return new() { Succeded = false, Message = $"Der opstod en uventet fejl: {ex.Message}" };
             }
+        }
+
+        public void Dispose()
+        {
+            _httpClient?.Dispose();
         }
     }
 }

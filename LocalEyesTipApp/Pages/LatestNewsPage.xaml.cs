@@ -26,7 +26,7 @@ public partial class LatestNewsPage : ContentPage
                 return;
 
             isRefreshing = value;
-            OnPropertyChanged();
+            OnPropertyChanged(nameof(IsRefreshing));
         }
     }
 
@@ -76,7 +76,6 @@ public partial class LatestNewsPage : ContentPage
         if (IsBusy)
             return;
 
-        //LocaleyesLatestNewsWebView = new WebView();
         LocaleyesLatestNewsWebView.Reload();
 
         IsBusy = false;

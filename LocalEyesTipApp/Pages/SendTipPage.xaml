@@ -2,6 +2,8 @@
 <ContentPage x:Class="LocalEyesTipApp.Pages.SendTipPage"
              xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:LocalEyesTipApp.Pages"
+             x:DataType="local:SendTipPage"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              Title="Send Tip!">
 
@@ -129,17 +131,16 @@
                     Grid.Column="0"
                     SelectionMode="None" />
 
-                <Button
-                    x:Name="addFilesButton"
-                    FontSize="Title"
+                <Grid
+                    x:Name="addfilesbuttongrid"
                     Grid.Row="10"
                     Grid.Column="0"
                     HorizontalOptions="Fill"
                     VerticalOptions="Center"
-                    Margin="5"
-                    Text="Vedhæft billeder/videoer"
-                    Clicked="OnAddFilesButton_Clicked" />
-                
+                    Margin="5">
+
+                </Grid>
+
                 <Button
                     x:Name="sendTipButton"
                     FontSize="Title"
