@@ -1,4 +1,6 @@
 ﻿using ObjCRuntime;
+using System;
+using System.Diagnostics;
 using UIKit;
 
 namespace LocalEyesTipApp
@@ -10,7 +12,15 @@ namespace LocalEyesTipApp
         {
             // if you want to use a different Application Delegate class from "AppDelegate"
             // you can specify it here.
-            UIApplication.Main(args, null, typeof(AppDelegate));
+            try
+            {
+                UIApplication.Main(args, null, typeof(AppDelegate));
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+            
         }
     }
 }

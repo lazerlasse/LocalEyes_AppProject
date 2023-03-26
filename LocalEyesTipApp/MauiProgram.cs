@@ -2,6 +2,9 @@
 using LocalEyesTipApp.Interfaces;
 using LocalEyesTipApp.Pages;
 using CommunityToolkit.Maui;
+using Microsoft.Maui.Hosting;
+using Microsoft.Maui.Controls.Hosting;
+using LocalEyesTipApp.ViewModels;
 
 namespace LocalEyesTipApp
 {
@@ -16,11 +19,18 @@ namespace LocalEyesTipApp
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             }).UseMauiCommunityToolkit();
 
-
+            // Add Services...
             builder.Services.AddSingleton<IRestDataService, RestDataService>();
+
+            // Add View Models...
+            builder.Services.AddTransient<SendTipViewModel>();
+
+            // Add Pages...
             builder.Services.AddSingleton<LatestNewsPage>();
             builder.Services.AddSingleton<AboutPage>();
             builder.Services.AddTransient<SendTipPage>();
+            
+            
             return builder.Build();
         }
     }

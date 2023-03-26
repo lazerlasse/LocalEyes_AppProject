@@ -8,9 +8,9 @@ namespace LocalEyesTipApp.DataServices
         private readonly HttpClient _httpClient;
         private static readonly string _baseAddress = "https://app.localeyes.dk";
 
-        public RestDataService(HttpMessageHandler messageHandler)
+        public RestDataService()
         {
-            _httpClient = new HttpClient(messageHandler)
+            _httpClient = new HttpClient()
             {
                 BaseAddress = new Uri(_baseAddress)
             };

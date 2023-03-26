@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
-using Microsoft.Maui.Storage;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using System.Net.Mail;
+using Microsoft.Maui.Storage;
+using System.Collections.ObjectModel;
 
 namespace LocalEyesTipApp.Models
 {
@@ -14,7 +14,7 @@ namespace LocalEyesTipApp.Models
         private string address;
         private int? replyPhoneNumber;
         private string replyMail;
-        private IEnumerable<FileResult> mediaFiles;
+        private List<FileResult> mediaFiles;
 
 
         // Public properties...
@@ -83,7 +83,7 @@ namespace LocalEyesTipApp.Models
             }
         }
 
-        public IEnumerable<FileResult> MediaFiles
+        public List<FileResult> MediaFiles
         {
             get => mediaFiles;
             set

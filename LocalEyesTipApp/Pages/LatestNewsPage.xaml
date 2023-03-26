@@ -3,18 +3,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LocalEyesTipApp.Pages.LatestNewsPage"
              xmlns:local="clr-namespace:LocalEyesTipApp.Pages"
-             x:DataType="local:LatestNewsPage"
              Title="Senest Nyt">
     
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Send Tip!" Clicked="OnSendTipBtnClicked" />
     </ContentPage.ToolbarItems>
 
-    <Grid RowDefinitions="Auto,*,Auto" ColumnDefinitions="*,*,*,*" Margin="10">
+    <Grid
+        RowDefinitions="Auto,*,Auto"
+        ColumnDefinitions="*,*,*,*"
+        Padding="0,30,0,0">
         <!--Loading label should not render by default.-->
         <Label
             x:Name="labelLoading"
-            Margin="0,0,0,10"
+            Margin="0,10,0,10"
             Grid.Row="0"
             Grid.Column="0"
             Grid.ColumnSpan="4"

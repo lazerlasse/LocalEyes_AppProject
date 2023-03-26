@@ -3,8 +3,9 @@
              xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:LocalEyesTipApp.Pages"
-             x:DataType="local:SendTipPage"
+             xmlns:viewmodel="clr-namespace:LocalEyesTipApp.ViewModels"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:DataType="viewmodel:SendTipViewModel"
              Title="Send Tip!">
 
     <ContentPage.Resources>
@@ -16,142 +17,181 @@
         </Style>
     </ContentPage.Resources>
 
-    <Grid x:Name="mainView">
-        <ScrollView>
-            <Grid
-                Margin="10,10,10,10"
-                RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
-                ColumnDefinitions="*">
-                
-                <Label
-                    Text="Tip:"
-                    SemanticProperties.HeadingLevel="Level2"
-                    FontSize="Title"
-                    Grid.Row="0"
-                    Grid.Column="0"/>
-                
-                <Editor
-                    x:Name="tipMessageEntry"
-                    Keyboard="Text"
-                    FontSize="Body"
-                    Grid.Row="1"
-                    Grid.Column="0"
-                    Text="{Binding Path=Message.MessageText}"
-                    Placeholder="(Påkrævet) Beskriv kort hvad, hvor, hvornår?"
-                    AutoSize="TextChanges">
-                    <Editor.Behaviors>
-                        <toolkit:TextValidationBehavior
-                            InvalidStyle="{StaticResource InvalidEntryStyle}"
-                            Flags="ValidateOnValueChanged"
-                            MinimumLength="10"/>
-                    </Editor.Behaviors>
-                </Editor>
+    <Grid
+        Margin="10,10,10,10"
+        RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
+        RowSpacing="5"
+        ColumnDefinitions="*"
+        ColumnSpacing="5">
 
-                <Label
-                    Text="Adresse:"
-                    SemanticProperties.HeadingLevel="Level2"
-                    FontSize="Title"
-                    Grid.Row="2"
-                    Grid.Column="0"
-                    FontAutoScalingEnabled="True" />
-                
-                <Editor
-                    x:Name="addressEntry"
-                    Keyboard="Text"
-                    FontSize="Body"
-                    Grid.Row="3"
-                    Grid.Column="0"
-                    HorizontalOptions="Fill"
-                    Text="{Binding Path=Message.Address}"
-                    Placeholder="(Påkrævet) Hvor sker det?"
-                    AutoSize="TextChanges">
-                    <Editor.Behaviors>
-                        <toolkit:TextValidationBehavior
-                            InvalidStyle="{StaticResource InvalidEntryStyle}"
-                            Flags="ValidateOnValueChanged"
-                            MinimumLength="10"/>
-                    </Editor.Behaviors>
-                </Editor>
+        <Label
+            Text="Tip:"
+            SemanticProperties.HeadingLevel="Level2"
+            FontSize="Title"
+            Grid.Row="0"
+            Grid.Column="0"/>
 
-                <Label
-                    Text="Kontakt Nummer:"
-                    SemanticProperties.HeadingLevel="Level2"
-                    FontSize="Title"
-                    Grid.Row="4"
-                    Grid.Column="0"
-                    FontAutoScalingEnabled="True" />
-                
-                <Entry
-                    x:Name="phoneNumberEntry"
-                    Keyboard="Telephone"
-                    FontSize="Body"
-                    Grid.Row="5"
-                    Grid.Column="0"
-                    Text="{Binding Path=Message.ReplyPhoneNumber}"
-                    Placeholder="(Ikke påkrævet) Nummer vi kan kontakte dig på.">
-                    <Entry.Behaviors>
-                        <toolkit:MaskedBehavior Mask="XXXXXXXX"/>
-                    </Entry.Behaviors>
-                </Entry>
+        <Editor
+            Keyboard="Text"
+            FontSize="Body"
+            Grid.Row="1"
+            Grid.Column="0"
+            Text="{Binding Path=Message.MessageText}"
+            Placeholder="(Påkrævet) Beskriv kort hvad, hvor, hvornår?"
+            AutoSize="TextChanges"
+            FontAutoScalingEnabled="True"
+            IsEnabled="{Binding TipMessageEntryEnable}">
+            <Editor.Behaviors>
+                <toolkit:TextValidationBehavior
+                    InvalidStyle="{StaticResource InvalidEntryStyle}"
+                    Flags="ValidateOnValueChanged"
+                    MinimumLength="1"/>
+            </Editor.Behaviors>
+        </Editor>
 
-                <Label
-                    Text="Kontakt Email:"
-                    SemanticProperties.HeadingLevel="Level2"
-                    FontSize="Title"
-                    Grid.Row="6"
-                    Grid.Column="0"
-                    FontAutoScalingEnabled="True" />
-                
-                <Entry
-                    x:Name="mailEntry"
-                    Keyboard="Email"
-                    FontSize="Body"
-                    Grid.Row="7"
-                    Grid.Column="0"
-                    Text="{Binding Path=Message.ReplyMail}"
-                    Placeholder="(Ikke påkrævet) Mail vi kan kontakte dig på.">
-                    <Entry.Behaviors>
-                        <toolkit:EmailValidationBehavior
-                            InvalidStyle="{StaticResource InvalidEntryStyle}"
-                            ValidStyle="{StaticResource ValidEntryStyle}"
-                            Flags="ValidateOnValueChanged"/>
-                    </Entry.Behaviors>
-                </Entry>
+        <Label
+            Text="Adresse:"
+            SemanticProperties.HeadingLevel="Level2"
+            FontSize="Title"
+            Grid.Row="2"
+            Grid.Column="0"
+            FontAutoScalingEnabled="True" />
 
-                <Label
-                    Text="Vedhæftede filer:"
-                    SemanticProperties.HeadingLevel="Level2"
-                    FontSize="Title"
-                    Grid.Row="8"
-                    Grid.Column="0" />
-                
-                <ListView
-                    x:Name="filesListView"
-                    Grid.Row="9"
-                    Grid.Column="0"
-                    SelectionMode="None" />
+        <Editor
+            Keyboard="Text"
+            FontSize="Body"
+            Grid.Row="3"
+            Grid.Column="0"
+            HorizontalOptions="Fill"
+            Text="{Binding Path=Message.Address}"
+            Placeholder="(Påkrævet) Hvor sker det?"
+            AutoSize="TextChanges"
+            FontAutoScalingEnabled="True"
+            IsEnabled="{Binding AddressEntryEnable}">
+            <Editor.Behaviors>
+                <toolkit:TextValidationBehavior
+                    InvalidStyle="{StaticResource InvalidEntryStyle}"
+                    Flags="ValidateOnValueChanged"
+                    MinimumLength="1"/>
+            </Editor.Behaviors>
+        </Editor>
 
-                <Grid
-                    x:Name="addfilesbuttongrid"
-                    Grid.Row="10"
-                    Grid.Column="0"
-                    HorizontalOptions="Fill"
-                    VerticalOptions="Center"
-                    Margin="5">
+        <Label
+            Text="Kontakt Nummer:"
+            SemanticProperties.HeadingLevel="Level2"
+            FontSize="Title"
+            Grid.Row="4"
+            Grid.Column="0"
+            FontAutoScalingEnabled="True" />
 
-                </Grid>
+        <Entry
+            Keyboard="Telephone"
+            FontSize="Body"
+            Grid.Row="5"
+            Grid.Column="0"
+            Text="{Binding Path=Message.ReplyPhoneNumber}"
+            Placeholder="(Ikke påkrævet) Nummer vi kan kontakte dig på."
+            FontAutoScalingEnabled="True"
+            IsEnabled="{Binding PhoneNumberEntryEnable}">
+            <Entry.Behaviors>
+                <toolkit:MaskedBehavior Mask="XXXXXXXX"/>
+            </Entry.Behaviors>
+        </Entry>
 
-                <Button
-                    x:Name="sendTipButton"
-                    FontSize="Title"
-                    Grid.Row="11"
-                    Grid.Column="0"
-                    HorizontalOptions="Fill"
-                    VerticalOptions="Center"
-                    Margin="5"
-                    Text="Send Tip"
-                    Clicked="OnSendBtnClicked" />
-            </Grid>
-        </ScrollView>
+        <Label
+            Text="Kontakt Email:"
+            SemanticProperties.HeadingLevel="Level2"
+            FontSize="Title"
+            Grid.Row="6"
+            Grid.Column="0"
+            FontAutoScalingEnabled="True" />
+
+        <Entry
+            Keyboard="Email"
+            FontSize="Body"
+            Grid.Row="7"
+            Grid.Column="0"
+            Text="{Binding Path=Message.ReplyMail}"
+            Placeholder="(Ikke påkrævet) Mail vi kan kontakte dig på."
+            FontAutoScalingEnabled="True"
+            IsEnabled="{Binding MailEntryEnable}">
+            <Entry.Behaviors>
+                <toolkit:EmailValidationBehavior
+                    InvalidStyle="{StaticResource InvalidEntryStyle}"
+                    ValidStyle="{StaticResource ValidEntryStyle}"
+                    Flags="ValidateOnValueChanged"/>
+            </Entry.Behaviors>
+        </Entry>
+
+        <Label
+            Text="Vedhæftede filer:"
+            SemanticProperties.HeadingLevel="Level2"
+            FontSize="Title"
+            Grid.Row="8"
+            Grid.Column="0" 
+            FontAutoScalingEnabled="True"/>
+
+        <ListView
+            Grid.Row="9"
+            Grid.Column="0"
+            SelectionMode="None"
+            ItemsSource="{Binding Files}"/>
+
+        <Button
+            Text="Tilføj Billeder/Videoer"
+            FontSize="18"
+            Grid.Row="10"
+            Grid.Column="0"
+            HorizontalOptions="Fill"
+            VerticalOptions="Center"
+            IsEnabled="{Binding AddFilesButtonEnable}"
+            Command="{Binding AddFilesAsyncCommand}"
+            IsVisible="{OnPlatform iOS=false, Android=true, WinUI=true}"/>
+
+        <Button
+            Text="Tilføj Billede"
+            FontSize="18"
+            Grid.Row="11"
+            Grid.Column="0"
+            HorizontalOptions="Fill"
+            VerticalOptions="Center"
+            Margin="5"
+            IsEnabled="{Binding AddPhotoButtonEnable}"
+            Command="{Binding AddPhotoAsyncCommand}"
+            IsVisible="{OnPlatform iOS=true, Android=false, WinUI=false}"/>
+
+        <Button
+            Text="Tilføj Video"
+            FontSize="18"
+            Grid.Row="11"
+            Grid.Column="1"
+            HorizontalOptions="Fill"
+            VerticalOptions="Center"
+            Margin="5"
+            IsEnabled="{Binding AddVideoButtonEnable}"
+            Command="{Binding AddVideoAsyncCommand}"
+            IsVisible="{OnPlatform iOS=true, Android=false, WinUI=false}"/>
+
+        <Button
+            FontSize="Title"
+            Grid.Row="12"
+            Grid.Column="0"
+            HorizontalOptions="Fill"
+            VerticalOptions="Center"
+            Margin="5"
+            Text="Send Tip"
+            IsEnabled="{Binding SendTipButtonEnable}"
+            Command="{Binding SendTipAsyncCommand}"/>
+
+        <ActivityIndicator
+            x:Name="loadingActivityIndicator"
+            IsVisible="{Binding IsBusy}"
+            IsRunning="{Binding IsBusy}"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="CenterAndExpand"
+            HeightRequest="200"
+            WidthRequest="200"
+            Grid.ColumnSpan="4"
+            Grid.RowSpan="13"/>
     </Grid>
 </ContentPage>
