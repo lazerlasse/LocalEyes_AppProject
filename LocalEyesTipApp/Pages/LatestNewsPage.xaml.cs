@@ -6,12 +6,14 @@ namespace LocalEyesTipApp.Pages;
 public partial class LatestNewsPage : ContentPage
 {
     private bool isRefreshing;
+    private bool isLoading;
 
     public Command RefreshCommand { get; }
 
     public LatestNewsPage()
     {
         InitializeComponent();
+        IsLoading = false;
         RefreshCommand = new Command(RefreshWebView);
         LocaleyesLatestNewsWebView.Source = "https://localeyes.dk/category/agency/";
         BindingContext = this;
@@ -30,8 +32,20 @@ public partial class LatestNewsPage : ContentPage
         }
     }
 
+    public bool IsLoading
+    {
+        get => IsLoading;
+        set
+        {
+            if(isLoading == value)
+                return;
 
-    private async void OnSendTipBtnClicked(object sender, EventArgs e)
+            isLoading = value;
+            OnPropertyChanged(nameof(IsLoading));
+        }
+    }
+
+    async void OnSendTipBtnClicked(object sender, EventArgs e)
     {
         var navigationParameter = new Dictionary<string, object>
         {
@@ -41,17 +55,23 @@ public partial class LatestNewsPage : ContentPage
         await Shell.Current.GoToAsync(nameof(SendTipPage), navigationParameter);
     }
 
-    private void WebView_Navigated(object sender, WebNavigatedEventArgs e)
+    void WebView_Navigated(object sender, WebNavigatedEventArgs e)
     {
-        labelLoading.IsVisible = false;
+        if(IsLoading is true)
+            IsLoading = false;
     }
 
-    private void WebView_Navigating(object sender, WebNavigatingEventArgs e)
+    void WebView_Navigating(object sender, WebNavigatingEventArgs e)
     {
-        labelLoading.IsVisible = true;
+#if ANDROID
+        if(IsLoading is false)
+            IsLoading = true;
+#else
+        IsLoading = false;
+#endif
     }
 
-    private async void OnBackButtonClicked(object sender, EventArgs e)
+    async void OnBackButtonClicked(object sender, EventArgs e)
     {
         if (LocaleyesLatestNewsWebView.CanGoBack)
         {
@@ -63,7 +83,7 @@ public partial class LatestNewsPage : ContentPage
         }
     }
 
-    private void OnForwardButtonClicked(object sender, EventArgs e)
+    void OnForwardButtonClicked(object sender, EventArgs e)
     {
         if (LocaleyesLatestNewsWebView.CanGoForward)
         {
@@ -71,7 +91,7 @@ public partial class LatestNewsPage : ContentPage
         }
     }
 
-    private void RefreshWebView()
+    void RefreshWebView()
     {
         if (IsBusy)
             return;
@@ -82,7 +102,7 @@ public partial class LatestNewsPage : ContentPage
         IsRefreshing = false;
     }
 
-    private void OnHomeNavigationButton_Clicked(object sender, EventArgs e)
+    void OnHomeNavigationButton_Clicked(object sender, EventArgs e)
     {
         LocaleyesLatestNewsWebView.Source = "https://localeyes.dk/category/agency/";
     }

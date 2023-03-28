@@ -12,7 +12,9 @@
     <Grid
         RowDefinitions="Auto,*,Auto"
         ColumnDefinitions="*,*,*,*"
-        Padding="0,30,0,0">
+        ColumnSpacing="5"
+        RowSpacing="5"
+        Padding="0,10,0,0">
         <!--Loading label should not render by default.-->
         <Label
             x:Name="labelLoading"
@@ -21,19 +23,19 @@
             Grid.Column="0"
             Grid.ColumnSpan="4"
             Text="Indlæser..."
-            IsVisible="false"
+            IsVisible="{Binding Path=IsLoading}"
             HorizontalTextAlignment="Center"
             FontAttributes="Bold"
             FontSize="Medium" />
-        
+
         <RefreshView
             Grid.Row="1"
             Grid.Column="0"
             Grid.ColumnSpan="4"
             Margin="0,0,0,10"
-            IsRefreshing="{Binding Path=IsRefreshing}"
-            Command="{Binding Path=RefreshCommand}">
-            
+            Command="{Binding Path=RefreshCommand}"
+            IsRefreshing="{Binding Path=IsRefreshing}">
+
             <WebView
                 x:Name="LocaleyesLatestNewsWebView"
                 Navigating="WebView_Navigating"

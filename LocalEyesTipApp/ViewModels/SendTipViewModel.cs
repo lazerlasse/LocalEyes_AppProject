@@ -1,5 +1,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Maui.Controls;
 using LocalEyesTipApp.DataServices;
 using LocalEyesTipApp.Interfaces;
 using LocalEyesTipApp.Models;
@@ -16,35 +17,9 @@ public partial class SendTipViewModel : BaseViewModel
     public SendTipViewModel(IRestDataService dataService)
     {
         _restDataService = dataService;
-
-        Message.MediaFiles ??= new();
     }
 
     public ObservableCollection<string> Files { get; private set; } = new();
-
-    [ObservableProperty]
-    bool addFilesButtonEnable;
-
-    [ObservableProperty]
-    bool addPhotoButtonEnable;
-
-    [ObservableProperty]
-    bool addVideoButtonEnable;
-
-    [ObservableProperty]
-    bool sendTipButtonEnable;
-
-    [ObservableProperty]
-    bool tipMessageEntryEnable;
-
-    [ObservableProperty]
-    bool addressEntryEnable;
-
-    [ObservableProperty]
-    bool phoneNumberEntryEnable;
-
-    [ObservableProperty]
-    bool mailEntryEnable;
 
     [ObservableProperty]
     MessageModel message;
@@ -57,14 +32,10 @@ public partial class SendTipViewModel : BaseViewModel
         if (!userInputIsValid)
             return;
 
-        DisableButtonsAndEntries();
-
         IsBusy = true;
 
         // Send message and files to api server.
         var result = await _restDataService.SendTipAsync(Message);
-
-        EnableButtonsAndEntries();
 
         IsBusy = false;
 
@@ -164,32 +135,6 @@ public partial class SendTipViewModel : BaseViewModel
             await Shell.Current.DisplayAlert("Der opstod en uventet fejl!", "Forsøg venligst igen, eller kontakt udvikleren hvis problemet fortsætter!", "Ok");
             return;
         }
-    }
-
-    void DisableButtonsAndEntries()
-    {
-        // Disable buttons and entries to prevent dubble posting issues.
-        AddFilesButtonEnable = false;
-        AddPhotoButtonEnable = false;
-        AddVideoButtonEnable = false;
-        SendTipButtonEnable = false;
-        TipMessageEntryEnable = false;
-        AddressEntryEnable = false;
-        PhoneNumberEntryEnable = false;
-        MailEntryEnable = false;
-    }
-
-    void EnableButtonsAndEntries()
-    {
-        // Activate buttons and entries again.
-        AddFilesButtonEnable = true;
-        AddPhotoButtonEnable = true;
-        AddVideoButtonEnable = true;
-        SendTipButtonEnable = true;
-        TipMessageEntryEnable = true;
-        AddressEntryEnable = true;
-        PhoneNumberEntryEnable = true;
-        MailEntryEnable = true;
     }
 
     async Task<bool> ValidateInputs()
