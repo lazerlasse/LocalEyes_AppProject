@@ -122,10 +122,10 @@ public partial class SendTipViewModel : BaseViewModel
             };
 
             var result = await MediaPicker.PickVideoAsync(options);
-        
-            if (result == null)
+
+            if (result is null)
                 return;
-        
+
             Message.MediaFiles.Add(result);
             Files.Add(result.FileName);
         }
@@ -134,6 +134,55 @@ public partial class SendTipViewModel : BaseViewModel
             Debug.WriteLine("Der opstod en uventet fejl: ", ex.Message);
             await Shell.Current.DisplayAlert("Der opstod en uventet fejl!", "Forsøg venligst igen, eller kontakt udvikleren hvis problemet fortsætter!", "Ok");
             return;
+        }
+    }
+
+    [RelayCommand]
+    async void TakePhotoAsync()
+    {
+        if (MediaPicker.Default.IsCaptureSupported)
+        {
+            try
+            {
+                FileResult photo = await MediaPicker.Default.CapturePhotoAsync();
+
+                if (photo is null)
+                    return;
+
+                Message.MediaFiles.Add(photo);
+                Files.Add(photo.FileName);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Der opstod en uventet fejl: ", ex.Message);
+                await Shell.Current.DisplayAlert("Der opstod en uventet fejl!", "Forsøg venligst igen, eller kontakt udvikleren hvis problemet fortsætter!", "Ok");
+                return;
+            }
+
+        }
+    }
+
+    [RelayCommand]
+    async void RecordVideoAsync()
+    {
+        if (MediaPicker.Default.IsCaptureSupported)
+        {
+            try
+            {
+                FileResult video = await MediaPicker.Default.CaptureVideoAsync();
+
+                if (video is null)
+                    return;
+
+                Message.MediaFiles.Add(video);
+                Files.Add(video.FileName);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Der opstod en uventet fejl: ", ex.Message);
+                await Shell.Current.DisplayAlert("Der opstod en uventet fejl!", "Forsøg venligst igen, eller kontakt udvikleren hvis problemet fortsætter!", "Ok");
+                return;
+            }
         }
     }
 

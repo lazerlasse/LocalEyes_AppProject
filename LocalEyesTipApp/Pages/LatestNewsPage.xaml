@@ -13,26 +13,30 @@
         RowDefinitions="Auto,*,Auto"
         ColumnDefinitions="*,*,*,*"
         ColumnSpacing="5"
-        RowSpacing="5"
-        Padding="0,10,0,0">
+        Padding="0,0,0,5">
         <!--Loading label should not render by default.-->
-        <Label
-            x:Name="labelLoading"
-            Margin="0,10,0,10"
+        <Grid
+            RowDefinitions="*"
+            ColumnDefinitions="*"
             Grid.Row="0"
             Grid.Column="0"
             Grid.ColumnSpan="4"
-            Text="Indlæser..."
-            IsVisible="{Binding Path=IsLoading}"
-            HorizontalTextAlignment="Center"
-            FontAttributes="Bold"
-            FontSize="Medium" />
+            IsVisible="{OnPlatform Android=true, iOS=false, MacCatalyst=false, WinUI=true}">
+
+            <Label
+                x:Name="labelLoading"
+                Text="Indlæser..."
+                IsVisible="false"
+                HorizontalTextAlignment="Center"
+                FontAttributes="Bold"
+                FontSize="Medium" />
+        </Grid>
 
         <RefreshView
             Grid.Row="1"
             Grid.Column="0"
             Grid.ColumnSpan="4"
-            Margin="0,0,0,10"
+            Margin="0,0,0,5"
             Command="{Binding Path=RefreshCommand}"
             IsRefreshing="{Binding Path=IsRefreshing}">
 
@@ -42,8 +46,8 @@
                 Navigated="WebView_Navigated"
                 VerticalOptions="FillAndExpand"
                 HorizontalOptions="Fill"
-                MinimumHeightRequest="800"
-                MinimumWidthRequest="400"/>
+                MinimumHeightRequest="200"
+                MinimumWidthRequest="100"/>
         </RefreshView>
 
         <ImageButton

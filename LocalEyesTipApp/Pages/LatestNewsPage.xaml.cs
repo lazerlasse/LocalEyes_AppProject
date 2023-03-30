@@ -6,14 +6,12 @@ namespace LocalEyesTipApp.Pages;
 public partial class LatestNewsPage : ContentPage
 {
     private bool isRefreshing;
-    private bool isLoading;
 
     public Command RefreshCommand { get; }
 
     public LatestNewsPage()
     {
         InitializeComponent();
-        IsLoading = false;
         RefreshCommand = new Command(RefreshWebView);
         LocaleyesLatestNewsWebView.Source = "https://localeyes.dk/category/agency/";
         BindingContext = this;
@@ -32,19 +30,7 @@ public partial class LatestNewsPage : ContentPage
         }
     }
 
-    public bool IsLoading
-    {
-        get => IsLoading;
-        set
-        {
-            if(isLoading == value)
-                return;
-
-            isLoading = value;
-            OnPropertyChanged(nameof(IsLoading));
-        }
-    }
-
+    
     async void OnSendTipBtnClicked(object sender, EventArgs e)
     {
         var navigationParameter = new Dictionary<string, object>
@@ -57,18 +43,14 @@ public partial class LatestNewsPage : ContentPage
 
     void WebView_Navigated(object sender, WebNavigatedEventArgs e)
     {
-        if(IsLoading is true)
-            IsLoading = false;
+        if(labelLoading.IsVisible is true)
+            labelLoading.IsVisible = false;
     }
 
     void WebView_Navigating(object sender, WebNavigatingEventArgs e)
     {
-#if ANDROID
-        if(IsLoading is false)
-            IsLoading = true;
-#else
-        IsLoading = false;
-#endif
+        if(labelLoading.IsVisible is false)
+            labelLoading.IsVisible = true;
     }
 
     async void OnBackButtonClicked(object sender, EventArgs e)

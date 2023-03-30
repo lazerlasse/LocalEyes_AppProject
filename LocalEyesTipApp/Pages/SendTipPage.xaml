@@ -19,7 +19,7 @@
 
     <Grid
         Margin="10,10,10,10"
-        RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,*,Auto,Auto"
+        RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,*,Auto,Auto,Auto"
         RowSpacing="5"
         ColumnDefinitions="*,*"
         ColumnSpacing="5">
@@ -163,7 +163,6 @@
             Grid.Column="0"
             HorizontalOptions="Fill"
             VerticalOptions="Center"
-            Margin="5"
             Command="{Binding AddPhotoAsyncCommand}"
             IsVisible="{OnPlatform iOS=true, Android=false, WinUI=false}"/>
 
@@ -174,24 +173,42 @@
             Grid.Column="1"
             HorizontalOptions="Fill"
             VerticalOptions="Center"
-            Margin="5"
             Command="{Binding AddVideoAsyncCommand}"
             IsVisible="{OnPlatform iOS=true, Android=false, WinUI=false}"/>
 
         <Button
-            FontSize="Title"
+            Text="Tag Billede"
+            FontSize="18"
             Grid.Row="11"
+            Grid.Column="0"
+            HorizontalOptions="Fill"
+            VerticalOptions="Center"
+            Command="{Binding TakePhotoAsyncCommand}"
+            IsVisible="{OnPlatform iOS=true, Android=false, WinUI=false}"/>
+
+        <Button
+            Text="Optag Video"
+            FontSize="18"
+            Grid.Row="11"
+            Grid.Column="1"
+            HorizontalOptions="Fill"
+            VerticalOptions="Center"
+            Command="{Binding RecordVideoAsyncCommand}"
+            IsVisible="{OnPlatform iOS=true, Android=false, WinUI=false}"/>
+
+        <Button
+            FontSize="Title"
+            Grid.Row="12"
             Grid.Column="0"
             Grid.ColumnSpan="2"
             HorizontalOptions="Fill"
             VerticalOptions="Center"
-            Margin="5"
             Text="Send Tip"
             Command="{Binding SendTipAsyncCommand}"/>
 
         <ActivityIndicator
             Grid.ColumnSpan="4"
-            Grid.RowSpan="12"
+            Grid.RowSpan="13"
             HorizontalOptions="CenterAndExpand"
             VerticalOptions="CenterAndExpand"
             HeightRequest="300"
