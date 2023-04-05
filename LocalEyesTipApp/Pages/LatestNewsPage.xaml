@@ -4,23 +4,21 @@
              x:Class="LocalEyesTipApp.Pages.LatestNewsPage"
              xmlns:local="clr-namespace:LocalEyesTipApp.Pages"
              Title="Senest Nyt">
-    
+
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Send Tip!" Clicked="OnSendTipBtnClicked" />
     </ContentPage.ToolbarItems>
 
     <Grid
         RowDefinitions="Auto,*,Auto"
-        ColumnDefinitions="*,*,*,*"
-        ColumnSpacing="5"
-        Padding="0,0,0,5">
+        ColumnDefinitions="*"
+        ColumnSpacing="5">
         <!--Loading label should not render by default.-->
         <Grid
             RowDefinitions="*"
             ColumnDefinitions="*"
             Grid.Row="0"
             Grid.Column="0"
-            Grid.ColumnSpan="4"
             IsVisible="{OnPlatform Android=true, iOS=false, MacCatalyst=false, WinUI=true}">
 
             <Label
@@ -35,8 +33,6 @@
         <RefreshView
             Grid.Row="1"
             Grid.Column="0"
-            Grid.ColumnSpan="4"
-            Margin="0,0,0,5"
             Command="{Binding Path=RefreshCommand}"
             IsRefreshing="{Binding Path=IsRefreshing}">
 
@@ -50,40 +46,58 @@
                 MinimumWidthRequest="100"/>
         </RefreshView>
 
-        <ImageButton
-            x:Name="backNavigationButton"
+        <Grid
             Grid.Row="2"
             Grid.Column="0"
-            Clicked="OnBackButtonClicked"
-            HeightRequest="30"
-            WidthRequest="30"
-            Source="arrow_left_solid" />
+            RowDefinitions="Auto"
+            ColumnDefinitions="*,*,*,*"
+            Padding="10"
+            BackgroundColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}">
 
-        <ImageButton
-            x:Name="HomeNavigationButton"
-            Grid.Row="2"
-            Grid.Column="1"
-            Clicked="OnHomeNavigationButton_Clicked"
-            HeightRequest="30"
-            WidthRequest="30"
-            Source="house_solid" />
+            <ImageButton
+                x:Name="backNavigationButton"
+                Grid.Row="0"
+                Grid.Column="0"
+                Clicked="OnBackButtonClicked"
+                HeightRequest="30"
+                WidthRequest="30"
+                VerticalOptions="Center"
+                HorizontalOptions="Fill"
+                Source="arrow_left_solid" />
 
-        <ImageButton
-            x:Name="RefreshNavigationButton"
-            Grid.Row="2"
-            Grid.Column="2"
-            Command="{Binding Path=RefreshCommand}"
-            HeightRequest="30"
-            WidthRequest="30"
-            Source="rotate_right_solid" />
+            <ImageButton
+                x:Name="HomeNavigationButton"
+                Grid.Row="0"
+                Grid.Column="1"
+                Clicked="OnHomeNavigationButton_Clicked"
+                HeightRequest="30"
+                WidthRequest="30"
+                VerticalOptions="Center"
+                HorizontalOptions="Fill"
+                Source="house_solid" />
 
-        <ImageButton
-            x:Name="forwardNavigationButton"
-            Grid.Row="2"
-            Grid.Column="3"
-            Clicked="OnForwardButtonClicked"
-            HeightRequest="30"
-            WidthRequest="30"
-            Source="arrow_right_solid"/>
+            <ImageButton
+                x:Name="RefreshNavigationButton"
+                Grid.Row="0"
+                Grid.Column="2"
+                Command="{Binding Path=RefreshCommand}"
+                HeightRequest="30"
+                WidthRequest="30"
+                VerticalOptions="Center"
+                HorizontalOptions="Fill"
+                Source="rotate_right_solid" />
+
+            <ImageButton
+                x:Name="forwardNavigationButton"
+                Grid.Row="0"
+                Grid.Column="3"
+                Clicked="OnForwardButtonClicked"
+                HeightRequest="30"
+                WidthRequest="30"
+                VerticalOptions="Center"
+                HorizontalOptions="Fill"
+                Source="arrow_right_solid"/>
+
+        </Grid>
     </Grid>
 </ContentPage>

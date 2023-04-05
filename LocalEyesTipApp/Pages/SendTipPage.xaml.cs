@@ -16,6 +16,7 @@ public partial class SendTipPage : ContentPage
     public SendTipPage(SendTipViewModel viewModel)
     {
         InitializeComponent();
+
         BindingContext = viewModel;
     }
 }

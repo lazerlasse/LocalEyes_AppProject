@@ -18,203 +18,189 @@
     </ContentPage.Resources>
 
     <Grid
-        Margin="10,10,10,10"
-        RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,*,Auto,Auto,Auto"
-        RowSpacing="5"
-        ColumnDefinitions="*,*"
-        ColumnSpacing="5">
+        ColumnDefinitions="*"
+        RowDefinitions="*">
 
-        <Label
-            Text="Tip:"
-            SemanticProperties.HeadingLevel="Level2"
-            FontSize="Title"
+        <ScrollView
+            Orientation="Vertical"
+            Grid.Column="0"
             Grid.Row="0"
-            Grid.Column="0"
-            Grid.ColumnSpan="2"/>
+            MinimumHeightRequest="500">
+            
+            <VerticalStackLayout
+                Spacing="5"
+                Margin="10">
 
-        <Editor
-            Keyboard="Text"
-            FontSize="Body"
-            Grid.Row="1"
-            Grid.Column="0"
-            Grid.ColumnSpan="2"
-            Text="{Binding Path=Message.MessageText}"
-            Placeholder="(Påkrævet) Beskriv kort hvad, hvor, hvornår?"
-            AutoSize="TextChanges"
-            FontAutoScalingEnabled="True">
-            <Editor.Behaviors>
-                <toolkit:TextValidationBehavior
-                    InvalidStyle="{StaticResource InvalidEntryStyle}"
-                    Flags="ValidateOnValueChanged"
-                    MinimumLength="1"/>
-            </Editor.Behaviors>
-        </Editor>
+                <Label
+                    Text="Tip:"
+                    SemanticProperties.HeadingLevel="Level2"
+                    FontSize="Title"/>
 
-        <Label
-            Text="Adresse:"
-            SemanticProperties.HeadingLevel="Level2"
-            FontSize="Title"
-            Grid.Row="2"
-            Grid.Column="0"
-            Grid.ColumnSpan="2"
-            FontAutoScalingEnabled="True" />
+                <ScrollView 
+                    Orientation="Vertical"
+                    VerticalScrollBarVisibility="Default"
+                    VerticalOptions="Fill"
+                    MinimumHeightRequest="100"
+                    MaximumHeightRequest="100">
 
-        <Editor
-            Keyboard="Text"
-            FontSize="Body"
-            Grid.Row="3"
-            Grid.Column="0"
-            Grid.ColumnSpan="2"
-            HorizontalOptions="Fill"
-            Text="{Binding Path=Message.Address}"
-            Placeholder="(Påkrævet) Hvor sker det?"
-            AutoSize="TextChanges"
-            FontAutoScalingEnabled="True">
-            <Editor.Behaviors>
-                <toolkit:TextValidationBehavior
-                    InvalidStyle="{StaticResource InvalidEntryStyle}"
-                    Flags="ValidateOnValueChanged"
-                    MinimumLength="1"/>
-            </Editor.Behaviors>
-        </Editor>
+                    <Editor
+                        Keyboard="Text"
+                        FontSize="Body"
+                        Text="{Binding Path=Message.MessageText}"
+                        Placeholder="(Påkrævet) Beskriv kort hvad, hvor, hvornår?"
+                        HorizontalOptions="Fill"
+                        VerticalOptions="FillAndExpand"
+                        VerticalTextAlignment="Start"
+                        AutoSize="TextChanges">
+                        <Editor.Behaviors>
+                            <toolkit:TextValidationBehavior
+                                InvalidStyle="{StaticResource InvalidEntryStyle}"
+                                Flags="ValidateOnValueChanged"
+                                MinimumLength="1"/>
+                        </Editor.Behaviors>
+                    </Editor>
+                </ScrollView>
 
-        <Label
-            Text="Kontakt Nummer:"
-            SemanticProperties.HeadingLevel="Level2"
-            FontSize="Title"
-            Grid.Row="4"
-            Grid.Column="0"
-            Grid.ColumnSpan="2"
-            FontAutoScalingEnabled="True" />
+                <Label
+                    Text="Adresse:"
+                    SemanticProperties.HeadingLevel="Level2"
+                    FontSize="Title" />
 
-        <Entry
-            Keyboard="Telephone"
-            FontSize="Body"
-            Grid.Row="5"
-            Grid.Column="0"
-            Grid.ColumnSpan="2"
-            Text="{Binding Path=Message.ReplyPhoneNumber}"
-            Placeholder="(Ikke påkrævet) Nummer vi kan kontakte dig på."
-            FontAutoScalingEnabled="True">
-            <Entry.Behaviors>
-                <toolkit:MaskedBehavior Mask="XXXXXXXX"/>
-            </Entry.Behaviors>
-        </Entry>
+                <Entry
+                    Keyboard="Text"
+                    FontSize="Body"
+                    Text="{Binding Path=Message.Address}"
+                    Placeholder="(Påkrævet) Hvor sker det?">
+                    <Entry.Behaviors>
+                        <toolkit:TextValidationBehavior
+                            InvalidStyle="{StaticResource InvalidEntryStyle}"
+                            Flags="ValidateOnValueChanged"
+                            MinimumLength="1"/>
+                    </Entry.Behaviors>
+                </Entry>
 
-        <Label
-            Text="Kontakt Email:"
-            SemanticProperties.HeadingLevel="Level2"
-            FontSize="Title"
-            Grid.Row="6"
-            Grid.Column="0"
-            Grid.ColumnSpan="2"
-            FontAutoScalingEnabled="True" />
+                <Label
+                    Text="Kontakt Nummer:"
+                    SemanticProperties.HeadingLevel="Level2"
+                    FontSize="Title" />
 
-        <Entry
-            Keyboard="Email"
-            FontSize="Body"
-            Grid.Row="7"
-            Grid.Column="0"
-            Grid.ColumnSpan="2"
-            Text="{Binding Path=Message.ReplyMail}"
-            Placeholder="(Ikke påkrævet) Mail vi kan kontakte dig på."
-            FontAutoScalingEnabled="True">
-            <Entry.Behaviors>
-                <toolkit:EmailValidationBehavior
-                    InvalidStyle="{StaticResource InvalidEntryStyle}"
-                    ValidStyle="{StaticResource ValidEntryStyle}"
-                    Flags="ValidateOnValueChanged"/>
-            </Entry.Behaviors>
-        </Entry>
+                <Entry
+                    Keyboard="Telephone"
+                    FontSize="Body"
+                    Text="{Binding Path=Message.ReplyPhoneNumber}"
+                    Placeholder="(Ikke påkrævet) Nummer vi kan kontakte dig på.">
+                    <Entry.Behaviors>
+                        <toolkit:MaskedBehavior Mask="XXXXXXXX"/>
+                    </Entry.Behaviors>
+                </Entry>
 
-        <Label
-            Text="Vedhæftede filer:"
-            SemanticProperties.HeadingLevel="Level2"
-            FontSize="Title"
-            Grid.Row="8"
-            Grid.Column="0" 
-            Grid.ColumnSpan="2"
-            FontAutoScalingEnabled="True"/>
+                <Label
+                    Text="Kontakt Email:"
+                    SemanticProperties.HeadingLevel="Level2"
+                    FontSize="Title" />
 
-        <ListView
-            Grid.Row="9"
-            Grid.Column="0"
-            Grid.ColumnSpan="2"
-            SelectionMode="None"
-            VerticalOptions="FillAndExpand"
-            HorizontalOptions="Center"
-            ItemsSource="{Binding Files}"/>
+                <Entry
+                    Keyboard="Email"
+                    FontSize="Body"
+                    Text="{Binding Path=Message.ReplyMail}"
+                    Placeholder="(Ikke påkrævet) Mail vi kan kontakte dig på.">
+                    <Entry.Behaviors>
+                        <toolkit:EmailValidationBehavior
+                            InvalidStyle="{StaticResource InvalidEntryStyle}"
+                            ValidStyle="{StaticResource ValidEntryStyle}"
+                            Flags="ValidateOnValueChanged"/>
+                    </Entry.Behaviors>
+                </Entry>
 
-        <Button
-            Text="Tilføj Billeder/Videoer"
-            FontSize="18"
-            Grid.Row="10"
-            Grid.Column="0"
-            Grid.ColumnSpan="2"
-            HorizontalOptions="Fill"
-            VerticalOptions="Center"
-            Command="{Binding AddFilesAsyncCommand}"
-            IsVisible="{OnPlatform iOS=false, Android=true, WinUI=true}"/>
+                <Label
+                    Text="Vedhæftede filer:"
+                    SemanticProperties.HeadingLevel="Level2"
+                    FontSize="Title"/>
 
-        <Button
-            Text="Tilføj Billede"
-            FontSize="18"
-            Grid.Row="10"
-            Grid.Column="0"
-            HorizontalOptions="Fill"
-            VerticalOptions="Center"
-            Command="{Binding AddPhotoAsyncCommand}"
-            IsVisible="{OnPlatform iOS=true, Android=false, WinUI=false}"/>
+                <ListView
+                    SelectionMode="None"
+                    MinimumHeightRequest="100"
+                    MaximumHeightRequest="100"
+                    VerticalOptions="Fill"
+                    HorizontalOptions="Fill"
+                    ItemsSource="{Binding Files}"/>
 
-        <Button
-            Text="Tilføj Video"
-            FontSize="18"
-            Grid.Row="10"
-            Grid.Column="1"
-            HorizontalOptions="Fill"
-            VerticalOptions="Center"
-            Command="{Binding AddVideoAsyncCommand}"
-            IsVisible="{OnPlatform iOS=true, Android=false, WinUI=false}"/>
+                <Button
+                    Text="Tilføj Billeder/Videoer"
+                    FontSize="18"
+                    HorizontalOptions="Fill"
+                    Command="{Binding AddFilesAsyncCommand}"
+                    IsVisible="{OnPlatform iOS=false, Android=true, WinUI=true}"/>
 
-        <Button
-            Text="Tag Billede"
-            FontSize="18"
-            Grid.Row="11"
-            Grid.Column="0"
-            HorizontalOptions="Fill"
-            VerticalOptions="Center"
-            Command="{Binding TakePhotoAsyncCommand}"
-            IsVisible="{OnPlatform iOS=true, Android=false, WinUI=false}"/>
+                <Grid
+                    ColumnDefinitions="*,*"
+                    RowDefinitions="*"
+                    ColumnSpacing="5">
 
-        <Button
-            Text="Optag Video"
-            FontSize="18"
-            Grid.Row="11"
-            Grid.Column="1"
-            HorizontalOptions="Fill"
-            VerticalOptions="Center"
-            Command="{Binding RecordVideoAsyncCommand}"
-            IsVisible="{OnPlatform iOS=true, Android=false, WinUI=false}"/>
+                    <Button
+                        Text="Tilføj Billede"
+                        Grid.Column="0"
+                        Grid.Row="0"
+                        FontSize="18"
+                        HorizontalOptions="Fill"
+                        Command="{Binding AddPhotoAsyncCommand}"
+                        IsVisible="{OnPlatform iOS=true, Android=false, WinUI=false}"/>
 
-        <Button
-            FontSize="Title"
-            Grid.Row="12"
-            Grid.Column="0"
-            Grid.ColumnSpan="2"
-            HorizontalOptions="Fill"
-            VerticalOptions="Center"
-            Text="Send Tip"
-            Command="{Binding SendTipAsyncCommand}"/>
+                    <Button
+                        Text="Tilføj Video"
+                        Grid.Column="1"
+                        Grid.Row="0"
+                        FontSize="18"
+                        HorizontalOptions="Fill"
+                        Command="{Binding AddVideoAsyncCommand}"
+                        IsVisible="{OnPlatform iOS=true, Android=false, WinUI=false}"/>
+                
+                </Grid>
+
+                <Grid
+                    ColumnDefinitions="*,*"
+                    RowDefinitions="*"
+                    ColumnSpacing="5">
+
+                    <Button
+                        Text="Tag Billede"
+                        FontSize="18"
+                        Grid.Column="0"
+                        Grid.Row="0"
+                        HorizontalOptions="Fill"
+                        Command="{Binding TakePhotoAsyncCommand}"
+                        IsVisible="{OnPlatform iOS=true, Android=false, WinUI=false}"/>
+
+                    <Button
+                        Text="Optag Video"
+                        FontSize="18"
+                        Grid.Column="1"
+                        Grid.Row="0"
+                        HorizontalOptions="Fill"
+                        Command="{Binding RecordVideoAsyncCommand}"
+                        IsVisible="{OnPlatform iOS=true, Android=false, WinUI=false}"/>
+
+                </Grid>
+                
+                <Button
+                    Text="Send Tip"
+                    FontSize="18"
+                    HorizontalOptions="Fill"
+                    Command="{Binding SendTipAsyncCommand}"/>
+
+            </VerticalStackLayout>
+        </ScrollView>
 
         <ActivityIndicator
-            Grid.ColumnSpan="4"
-            Grid.RowSpan="13"
+            Grid.Row="0"
+            Grid.Column="0"
             HorizontalOptions="CenterAndExpand"
             VerticalOptions="CenterAndExpand"
-            HeightRequest="300"
-            WidthRequest="300"
-            Color="Gray"
+            HeightRequest="{OnPlatform Android=300, iOS=25}"
+            WidthRequest="{OnPlatform Android=300, iOS=25}"
+            BackgroundColor="{OnPlatform iOS={AppThemeBinding Light={StaticResource Gray400}, Dark={StaticResource Gray600}}}"
             IsRunning="{Binding IsBusy}"
             IsVisible="{Binding IsBusy}"/>
+
     </Grid>
 </ContentPage>
