@@ -41,6 +41,9 @@ namespace LocalEyesWebAPI.Controllers
         [RequestSizeLimit(1073741824)]
         public async Task<IActionResult> SendMessage([FromForm] RecievedMessageModel messageRecieved)
         {
+            // Log that incoming request is being handled..
+            _logger.LogInformation("Incoming message detected and start processing...", "Tip: " + messageRecieved.MessageText);
+
             // Create a string builder to build the final message to send.
             var messageToSend = new StringBuilder();
 

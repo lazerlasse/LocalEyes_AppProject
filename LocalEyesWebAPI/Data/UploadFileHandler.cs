@@ -1,4 +1,5 @@
 ﻿using LocalEyesWebAPI.Constants;
+using System.Text.RegularExpressions;
 
 namespace LocalEyesWebAPI.Data
 {
@@ -23,6 +24,8 @@ namespace LocalEyesWebAPI.Data
 
             foreach (var file in files)
             {
+                var fileName = file.FileName.ToUpper().Replace(" ", "-").Replace("Æ", "AE").Replace("Ø", "OE").Replace("Å", "AA");
+
                 var fullFilePath = Path.Combine(fullSavePath, file.FileName);
 
                 if (!File.Exists(fullFilePath))

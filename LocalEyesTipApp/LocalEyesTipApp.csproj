@@ -94,9 +94,9 @@
 		<CodesignProvision>LocalEyesAppSigning</CodesignProvision>
 	</PropertyGroup>
 
-	<!--<PropertyGroup Condition="'$(TargetFramework)'=='net6.0-ios'">
+	<PropertyGroup Condition="'$(TargetFramework)'=='net6.0-ios'">
 	  <CodesignKey>Apple Development: Created via API (75H8P4DTKT)</CodesignKey>
 	  <CodesignProvision>VS: com.companyname.localeyestipapp Development</CodesignProvision>
-	</PropertyGroup>-->
+	</PropertyGroup>
 
 </Project>

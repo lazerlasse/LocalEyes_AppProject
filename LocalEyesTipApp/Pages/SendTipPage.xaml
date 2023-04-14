@@ -169,7 +169,7 @@
                         Grid.Row="0"
                         HorizontalOptions="Fill"
                         Command="{Binding TakePhotoAsyncCommand}"
-                        IsVisible="{OnPlatform iOS=true, Android=false, WinUI=false}"/>
+                        IsVisible="{OnPlatform iOS=true, Android=true, WinUI=false}"/>
 
                     <Button
                         Text="Optag Video"
@@ -178,7 +178,7 @@
                         Grid.Row="0"
                         HorizontalOptions="Fill"
                         Command="{Binding RecordVideoAsyncCommand}"
-                        IsVisible="{OnPlatform iOS=true, Android=false, WinUI=false}"/>
+                        IsVisible="{OnPlatform iOS=true, Android=true, WinUI=false}"/>
 
                 </Grid>
                 
