@@ -32,6 +32,8 @@ public partial class SendTipViewModel : BaseViewModel
         if (!userInputIsValid)
             return;
 
+        await Shell.Current.DisplayAlert("Send tip:", "Du er ved at sende dit tip til os. Bemærk dog at hvis du har vedhæftet filer, så kan det tage noget tid at sende dit tip! Hav derfor tolmodighed og forlad ikke appen før overførslen er fuldført! Tryk ok for at fortsætte...", "OK");
+
         IsBusy = true;
 
         // Send message and files to api server.

@@ -12,7 +12,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 
 		<!-- Display name -->
-		<ApplicationTitle>Local Eyes App</ApplicationTitle>
+		<ApplicationTitle>Local Eyes</ApplicationTitle>
 
 		<!-- App Identifier -->
 		<ApplicationId>com.companyname.localeyestipapp</ApplicationId>
