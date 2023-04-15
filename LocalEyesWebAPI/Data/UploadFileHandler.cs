@@ -26,7 +26,7 @@ namespace LocalEyesWebAPI.Data
             {
                 var fileName = file.FileName.ToUpper().Replace(" ", "-").Replace("Æ", "AE").Replace("Ø", "OE").Replace("Å", "AA");
 
-                var fullFilePath = Path.Combine(fullSavePath, file.FileName);
+                var fullFilePath = Path.Combine(fullSavePath, fileName);
 
                 if (!File.Exists(fullFilePath))
                 {
