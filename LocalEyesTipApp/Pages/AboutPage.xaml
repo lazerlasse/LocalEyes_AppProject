@@ -33,23 +33,42 @@
             Margin="0,5,0,0"/>
 
             <Label
-            Text="Vi værner om dit privatliv"
-            FontSize="Title"
-            VerticalOptions="Fill"
-            HorizontalOptions="Fill"
-            VerticalTextAlignment="Start"
-            HorizontalTextAlignment="Start"
-            Margin="0,10,0,0"
-            SemanticProperties.HeadingLevel="Level2"/>
+                Text="Vi værner om dit privatliv"
+                FontSize="Title"
+                VerticalOptions="Fill"
+                HorizontalOptions="Fill"
+                VerticalTextAlignment="Start"
+                HorizontalTextAlignment="Start"
+                Margin="0,10,0,0"
+                SemanticProperties.HeadingLevel="Level2"/>
 
             <Label
-            Text="Du kan selvfølgelig være 100 procent anonym når du tipper os via appen, da du selv kan vælge om du vil sende kontaktoplysninger eller lign. med i beskeden. Du er desuden også dækket af kildebeskyttelse når du vælger at tippe os, ifølge gældende lovgivning."
-            FontSize="Body"
-            VerticalOptions="Fill"
-            HorizontalOptions="Fill"
-            HorizontalTextAlignment="Start"
-            VerticalTextAlignment="Start"
-            Margin="0,5,0,0"/>
+                Text="Du kan selvfølgelig være 100 procent anonym når du tipper os via appen, da du selv kan vælge om du vil sende kontaktoplysninger eller lign. med i beskeden. Du er desuden også dækket af kildebeskyttelse når du vælger at tippe os, ifølge gældende lovgivning."
+                FontSize="Body"
+                VerticalOptions="Fill"
+                HorizontalOptions="Fill"
+                HorizontalTextAlignment="Start"
+                VerticalTextAlignment="Start"
+                Margin="0,5,0,0"/>
+
+            <Label
+                Text="Artikler på Localeyes.dk"
+                FontSize="Title"
+                VerticalOptions="Fill"
+                HorizontalOptions="Fill"
+                VerticalTextAlignment="Start"
+                HorizontalTextAlignment="Start"
+                Margin="0,10,0,0"
+                SemanticProperties.HeadingLevel="Level2"/>
+
+            <Label
+                Text="Loacaleyes.dk tager ansvar for det indhold vi bringer, og vi arbejder derfor indenfor gældende lovgivning omkring god presseskik og presseetik. Ønsker du at klager over indhold på Localeyes.dk så skal du kontakte ansvarshavende chefredaktør Jakob Funder Jensen på mail: redaktor@localeyes.dk"
+                FontSize="Body"
+                VerticalOptions="Fill"
+                HorizontalOptions="Fill"
+                HorizontalTextAlignment="Start"
+                VerticalTextAlignment="Start"
+                Margin="0,5,0,0"/>
 
         </VerticalStackLayout>
     </ScrollView>
