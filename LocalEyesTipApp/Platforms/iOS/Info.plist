@@ -29,12 +29,12 @@
 		<key>XSAppIconAssets</key>
 		<string>Assets.xcassets/appicon.appiconset</string>
 		<key>NSCameraUsageDescription</key>
-		<string>If you want to take a picture with your camera we need permission to use the camera.</string>
+		<string>Hvis du ønsker at tage et billede og vedhæfte dit tip til os, så skal du give tilladelse til at bruge dit kamera.</string>
 		<key>NSMicrophoneUsageDescription</key>
-		<string>If you want to record a video to send ud we need permission to use the microphone.</string>
+		<string>Hvis du ønsker at optage en video og vedhæfte dit tip til os, så skal du give tilladelse til at bruge din mikrofon.</string>
 		<key>NSPhotoLibraryAddUsageDescription</key>
-		<string>If you want to attach a picture or video with your tip we need permissions to access your media gallery.</string>
+		<string>Hvis du vil vedhæfte et billede eller video til dit tip, så skal du give tilladelse til at tilgå dit galleri.</string>
 		<key>NSPhotoLibraryUsageDescription</key>
-		<string>If you want to attach a picture or video with your tip we need permissions to access your media gallery.</string>
+		<string>Hvis du vil vedhæfte et billede eller video til dit tip, så skal du give tilladelse til at tilgå dit galleri.</string>
 	</dict>
 </plist>

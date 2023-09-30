@@ -26,5 +26,13 @@
 	</array>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/appicon.appiconset</string>
+	<key>NSCameraUsageDescription</key>
+	<string>If you want to take a picture with your camera we need permission to use the camera.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>If you want to record a video to send ud we need permission to use the microphone.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>If you want to attach a picture or video with your tip we need permissions to access your media gallery.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>If you want to attach a picture or video with your tip we need permissions to access your media gallery.</string>
 </dict>
 </plist>

@@ -3,11 +3,25 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LocalEyesTipApp.Pages.LatestNewsPage"
              xmlns:local="clr-namespace:LocalEyesTipApp.Pages"
-             Title="Senest Nyt">
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:DataType="local:LatestNewsPage"
+             Title="Local Eyes Nyheder">
 
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Send Tip!" Clicked="OnSendTipBtnClicked" />
-    </ContentPage.ToolbarItems>
+    <!--<Shell.TitleView>
+        <HorizontalStackLayout Spacing="10">
+            <Image Source="localeyes_transparent_logo"
+                   HeightRequest="25"
+                   WidthRequest="25"/>
+            
+            <Label Text="Local Eyes - Senest Nyt"
+                   TextColor="White"
+                   HeightRequest="50"
+                   VerticalTextAlignment="Center"
+                   VerticalOptions="CenterAndExpand"
+                   FontSize="Title"
+                   FontAttributes="Bold"/>
+        </HorizontalStackLayout>
+    </Shell.TitleView>-->
 
     <Grid
         RowDefinitions="Auto,*,Auto"
@@ -52,7 +66,7 @@
             RowDefinitions="Auto"
             ColumnDefinitions="*,*,*,*"
             Padding="10"
-            BackgroundColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}">
+            BackgroundColor="{AppThemeBinding Light={StaticResource LocaleyesPrimary}, Dark={StaticResource LocaleyesPrimary}}">
 
             <ImageButton
                 x:Name="backNavigationButton"
@@ -63,7 +77,11 @@
                 WidthRequest="30"
                 VerticalOptions="Center"
                 HorizontalOptions="Fill"
-                Source="arrow_left_solid" />
+                Source="arrow_left_solid" >
+                <ImageButton.Behaviors>
+                    <toolkit:IconTintColorBehavior TintColor="White"/>
+                </ImageButton.Behaviors>
+            </ImageButton>
 
             <ImageButton
                 x:Name="HomeNavigationButton"
@@ -74,7 +92,11 @@
                 WidthRequest="30"
                 VerticalOptions="Center"
                 HorizontalOptions="Fill"
-                Source="house_solid" />
+                Source="house_solid">
+                <ImageButton.Behaviors>
+                    <toolkit:IconTintColorBehavior TintColor="White"/>
+                </ImageButton.Behaviors>
+            </ImageButton>
 
             <ImageButton
                 x:Name="RefreshNavigationButton"
@@ -85,7 +107,11 @@
                 WidthRequest="30"
                 VerticalOptions="Center"
                 HorizontalOptions="Fill"
-                Source="rotate_right_solid" />
+                Source="rotate_right_solid">
+                <ImageButton.Behaviors>
+                    <toolkit:IconTintColorBehavior TintColor="White"/>
+                </ImageButton.Behaviors>
+            </ImageButton>
 
             <ImageButton
                 x:Name="forwardNavigationButton"
@@ -96,8 +122,11 @@
                 WidthRequest="30"
                 VerticalOptions="Center"
                 HorizontalOptions="Fill"
-                Source="arrow_right_solid"/>
-
+                Source="arrow_right_solid">
+                <ImageButton.Behaviors>
+                    <toolkit:IconTintColorBehavior TintColor="White"/>
+                </ImageButton.Behaviors>
+            </ImageButton>
         </Grid>
     </Grid>
 </ContentPage>

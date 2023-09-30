@@ -13,7 +13,7 @@ public partial class LatestNewsPage : ContentPage
     {
         InitializeComponent();
         RefreshCommand = new Command(RefreshWebView);
-        LocaleyesLatestNewsWebView.Source = "https://localeyes.dk/category/agency/";
+        LoadLocalEyesWebSite();
         BindingContext = this;
     }
 
@@ -28,17 +28,6 @@ public partial class LatestNewsPage : ContentPage
             isRefreshing = value;
             OnPropertyChanged(nameof(IsRefreshing));
         }
-    }
-
-    
-    async void OnSendTipBtnClicked(object sender, EventArgs e)
-    {
-        var navigationParameter = new Dictionary<string, object>
-        {
-            { "Message", new MessageModel() }
-        };
-
-        await Shell.Current.GoToAsync(nameof(SendTipPage), navigationParameter);
     }
 
     void WebView_Navigated(object sender, WebNavigatedEventArgs e)
@@ -86,6 +75,18 @@ public partial class LatestNewsPage : ContentPage
 
     void OnHomeNavigationButton_Clicked(object sender, EventArgs e)
     {
-        LocaleyesLatestNewsWebView.Source = "https://localeyes.dk/category/agency/";
+        LoadLocalEyesWebSite();
+    }
+
+    async void LoadLocalEyesWebSite()
+    {
+        if (Connectivity.Current.NetworkAccess == NetworkAccess.Internet)
+        {
+            LocaleyesLatestNewsWebView.Source = "https://localeyes.dk/category/agency/";
+        }
+        else
+        {
+            await Shell.Current.DisplayAlert("Ingen internet!", "Du har muligvis ikke forbindelse til internettet og nyhederne kan derfor ikke indlæses. Opret forbindelse til internettet og prøv igen.", "Ok");
+        }
     }
 }

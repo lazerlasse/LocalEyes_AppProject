@@ -4,24 +4,20 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:pages="clr-namespace:LocalEyesTipApp.Pages"
-    Shell.FlyoutBehavior="Flyout" >
+    Shell.FlyoutBehavior="Disabled" >
 
-    <ShellContent
-        Title="Senest Nyt"
-        ContentTemplate="{DataTemplate pages:LatestNewsPage}"
-        Route="LatestNewsPage" 
-        Icon="square_rss_solid"/>
-
-    <FlyoutItem Icon="envelope_solid" Title="Send Tip">
-        <Tab>
-            <ShellContent ContentTemplate="{DataTemplate pages:SendTipPage}" />
+    <TabBar>
+        <Tab Title="Seneste Nyt"
+             Icon="square_rss_solid">
+            <ShellContent ContentTemplate="{DataTemplate pages:LatestNewsPage}"/>
         </Tab>
-    </FlyoutItem>
-
-    <FlyoutItem Icon="circle_info_solid" Title="Om Appen">
-        <Tab>
-            <ShellContent ContentTemplate="{DataTemplate pages:AboutPage}" />
+        <Tab Title="Tip os"
+             Icon="comment_dots_solid">
+            <ShellContent ContentTemplate="{DataTemplate pages:SendTipPage}"/>
         </Tab>
-    </FlyoutItem>
-    
+        <Tab Title="Om Appen"
+             Icon="circle_info_solid">
+            <ShellContent ContentTemplate="{DataTemplate pages:AboutPage}"/>
+        </Tab>
+    </TabBar>
 </Shell>

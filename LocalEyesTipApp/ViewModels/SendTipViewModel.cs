@@ -1,25 +1,30 @@
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
+using LocalEyesTipApp.Models;
 using Microsoft.Maui.Controls;
 using LocalEyesTipApp.DataServices;
 using LocalEyesTipApp.Interfaces;
-using LocalEyesTipApp.Models;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using LocalEyesTipApp.Helpers;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using LocalEyesTipApp.Pages;
 
 namespace LocalEyesTipApp.ViewModels;
 
-[QueryProperty(nameof(Message), nameof(Message))]
+
 public partial class SendTipViewModel : BaseViewModel
 {
     private readonly IRestDataService _restDataService;
 
     public SendTipViewModel(IRestDataService dataService)
     {
+        Message = new();
+
         _restDataService = dataService;
     }
 
     public ObservableCollection<string> Files { get; private set; } = new();
+    public ObservableCollection<MediaToUpload> MediaToUploads { get; private set; } = new();
 
     [ObservableProperty]
     MessageModel message;
@@ -77,6 +82,7 @@ public partial class SendTipViewModel : BaseViewModel
             {
                 Message.MediaFiles.Add(file);
                 Files.Add(file.FileName);
+                MediaToUploads.Add(new MediaToUpload { FileName = file.FileName, ImageFilePath = file.FullPath });
             }
         }
         catch (Exception ex)
@@ -104,6 +110,7 @@ public partial class SendTipViewModel : BaseViewModel
 
             Message.MediaFiles.Add(result);
             Files.Add(result.FileName);
+            MediaToUploads.Add(new MediaToUpload { FileName = result.FileName, ImageFilePath = result.FullPath });
         }
         catch (Exception ex)
         {
@@ -130,6 +137,7 @@ public partial class SendTipViewModel : BaseViewModel
 
             Message.MediaFiles.Add(result);
             Files.Add(result.FileName);
+            MediaToUploads.Add(new MediaToUpload { FileName = result.FileName, ImageFilePath = result.FullPath });
         }
         catch (Exception ex)
         {
@@ -153,6 +161,7 @@ public partial class SendTipViewModel : BaseViewModel
 
                 Message.MediaFiles.Add(photo);
                 Files.Add(photo.FileName);
+                MediaToUploads.Add(new MediaToUpload { FileName = photo.FileName, ImageFilePath = photo.FullPath });
             }
             catch (Exception ex)
             {
@@ -160,7 +169,6 @@ public partial class SendTipViewModel : BaseViewModel
                 await Shell.Current.DisplayAlert("Der opstod en uventet fejl!", "Forsøg venligst igen, eller kontakt udvikleren hvis problemet fortsætter!", "Ok");
                 return;
             }
-
         }
     }
 
@@ -178,6 +186,7 @@ public partial class SendTipViewModel : BaseViewModel
 
                 Message.MediaFiles.Add(video);
                 Files.Add(video.FileName);
+                MediaToUploads.Add(new MediaToUpload { FileName = video.FileName, ImageFilePath = video.FullPath });
             }
             catch (Exception ex)
             {
@@ -206,8 +215,18 @@ public partial class SendTipViewModel : BaseViewModel
     }
 
     [RelayCommand]
-    async Task GoBackAsync()
+    void RemoveMediaFileAsync(string fileName)
     {
-        await Shell.Current.GoToAsync("..");
+        var mediaUploadToDelete = MediaToUploads.FirstOrDefault(f => f.FileName == fileName);
+        if (mediaUploadToDelete is not null)
+        {
+            MediaToUploads.Remove(mediaUploadToDelete);
+        }
+
+        var fileToRemoveFromTip = Message.MediaFiles.FirstOrDefault(f => f.FileName == fileName);
+        if (fileToRemoveFromTip is not null)
+        {
+            Message.MediaFiles.Remove(fileToRemoveFromTip);
+        }
     }
 }

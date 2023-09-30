@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net6.0-android;net6.0-ios;net6.0-maccatalyst</TargetFrameworks>
-		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net6.0-windows10.0.19041.0</TargetFrameworks>
+		<TargetFrameworks>net7.0-android;net7.0-ios;net7.0-maccatalyst</TargetFrameworks>
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
-		<!-- <TargetFrameworks>$(TargetFrameworks);net6.0-tizen</TargetFrameworks> -->
+		<!-- <TargetFrameworks>$(TargetFrameworks);net7.0-tizen</TargetFrameworks> -->
 		<OutputType>Exe</OutputType>
 		<RootNamespace>LocalEyesTipApp</RootNamespace>
 		<UseMaui>true</UseMaui>
@@ -19,8 +19,8 @@
 		<ApplicationIdGuid>ce5ee6c2-6560-40a0-9175-46243d0da9a0</ApplicationIdGuid>
 
 		<!-- Versions -->
-		<ApplicationDisplayVersion>1.4.0</ApplicationDisplayVersion>
-		<ApplicationVersion>13</ApplicationVersion>
+		<ApplicationDisplayVersion>2.0.0</ApplicationDisplayVersion>
+		<ApplicationVersion>20</ApplicationVersion>
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">14.0</SupportedOSPlatformVersion>
@@ -36,10 +36,20 @@
 		<!-- Splash Screen -->
 		<MauiSplashScreen Include="Resources\Splash\splash.png" Color="#291fed" BaseSize="128,128" />
 
-		<!-- Images -->
+		<!-- Images and Image Updating -->
 		<MauiImage Include="Resources\Images\*" />
 		<MauiImage Update="Resources\Images\localeyes_transparent_logo.png" BaseSize="168,208" />
-
+		<MauiImage Update="Resources\Images\square_rss_solid.svg" BaseSize="28,28" />
+		<MauiImage Update="Resources\Images\comment_dots_solid.svg" BaseSize="28,28" />
+		<MauiImage Update="Resources\Images\circle_info_solid.svg" BaseSize="28,28" />
+		<MauiImage Update="Resources\Images\envelope_solid.svg" BaseSize="28,28" />
+		<MauiImage Update="Resources\Images\localeyes_topmenubar_logo.png" BaseSize="28,28" />
+		<MauiImage Update="Resources\Images\photo_film_solid.svg" BaseSize="28,28" TintColor="#E1E1E1" />
+		<MauiImage Update="Resources\Images\image_solid.svg" BaseSize="28,28" TintColor="#E1E1E1" />
+		<MauiImage Update="Resources\Images\film_solid.svg" BaseSize="28,28" TintColor="#E1E1E1" />
+		<MauiImage Update="Resources\Images\camera_solid.svg" BaseSize="28,28" TintColor="#E1E1E1" />
+		<MauiImage Update="Resources\Images\video_solid.svg" BaseSize="28,28" TintColor="#E1E1E1" />
+		<MauiImage Update="Resources\Images\paper_plane_solid.svg" BaseSize="28,28" TintColor="#E1E1E1" />
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
 
@@ -48,42 +58,43 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiImage Include="Resources\AppIcon\appiconfg.png" />
-	  <MauiImage Include="Resources\Splash\splash.png" />
+		<MauiImage Include="Resources\AppIcon\appiconfg.png" />
+		<MauiImage Include="Resources\Splash\splash.png" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="CommunityToolkit.Maui" Version="2.0.0" />
-	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
-	  <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
-	  <PackageReference Include="System.ServiceModel.Syndication" Version="7.0.0" />
+		<PackageReference Include="CommunityToolkit.Maui" Version="5.2.0" />
+		<PackageReference Include="CommunityToolkit.Maui.MediaElement" Version="2.0.0" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
+		<PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
+		<PackageReference Include="System.ServiceModel.Syndication" Version="7.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Properties\Resources.Designer.cs">
-	    <DesignTime>True</DesignTime>
-	    <AutoGen>True</AutoGen>
-	    <DependentUpon>Resources.resx</DependentUpon>
-	  </Compile>
+		<Compile Update="Properties\Resources.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Resources.resx</DependentUpon>
+		</Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <EmbeddedResource Update="Properties\Resources.resx">
-	    <Generator>ResXFileCodeGenerator</Generator>
-	    <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-	  </EmbeddedResource>
+		<EmbeddedResource Update="Properties\Resources.resx">
+			<Generator>ResXFileCodeGenerator</Generator>
+			<LastGenOutput>Resources.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Pages\AboutPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Pages\LatestNewsPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Pages\SendTipPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
+		<MauiXaml Update="Pages\AboutPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Pages\LatestNewsPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Pages\SendTipPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 	</ItemGroup>
 
 	<PropertyGroup Condition="$(TargetFramework.Contains('-ios')) and '$(Configuration)' == 'Release'">
@@ -92,11 +103,6 @@
 		<!--<CodesignEntitlement>Entitlements.plist</CodesignEntitlement>-->
 		<CodesignKey>Apple Distribution: Lasse Antonsen (2KKRDW599H)</CodesignKey>
 		<CodesignProvision>LocalEyesAppSigning</CodesignProvision>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(TargetFramework)'=='net6.0-ios'">
-	  <CodesignKey>Apple Development: Created via API (75H8P4DTKT)</CodesignKey>
-	  <CodesignProvision>VS: com.companyname.localeyestipapp Development</CodesignProvision>
 	</PropertyGroup>
 
 </Project>

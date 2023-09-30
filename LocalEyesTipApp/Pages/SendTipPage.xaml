@@ -4,9 +4,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:LocalEyesTipApp.Pages"
              xmlns:viewmodel="clr-namespace:LocalEyesTipApp.ViewModels"
+             xmlns:model="clr-namespace:LocalEyesTipApp.Models"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:DataType="viewmodel:SendTipViewModel"
-             Title="Send Tip!">
+             Title="Tip Local Eyes">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Send Tip"
+                     Command="{Binding SendTipAsyncCommand}"
+                     IsEnabled="{Binding IsNotBusy}" />
+    </ContentPage.ToolbarItems>
 
     <ContentPage.Resources>
         <Style x:Key="InvalidEntryStyle" TargetType="Entry">
@@ -26,7 +33,7 @@
             Grid.Column="0"
             Grid.Row="0"
             MinimumHeightRequest="500">
-            
+
             <VerticalStackLayout
                 Spacing="5"
                 Margin="10">
@@ -34,7 +41,8 @@
                 <Label
                     Text="Tip:"
                     SemanticProperties.HeadingLevel="Level2"
-                    FontSize="Title"/>
+                    FontAttributes="Bold"
+                    FontSize="20"/>
 
                 <ScrollView 
                     Orientation="Vertical"
@@ -43,151 +51,252 @@
                     MinimumHeightRequest="100"
                     MaximumHeightRequest="100">
 
-                    <Editor
-                        Keyboard="Text"
-                        FontSize="Body"
-                        Text="{Binding Path=Message.MessageText}"
-                        Placeholder="(Påkrævet) Beskriv kort hvad, hvor, hvornår?"
-                        HorizontalOptions="Fill"
-                        VerticalOptions="FillAndExpand"
-                        VerticalTextAlignment="Start"
-                        AutoSize="TextChanges">
-                        <Editor.Behaviors>
-                            <toolkit:TextValidationBehavior
+                    <Frame
+                        BackgroundColor="{StaticResource Gray200}"
+                        Padding="0">
+                        <Editor
+                            x:Name="MessageEntry"
+                            Keyboard="Text"
+                            Text="{Binding Path=Message.MessageText}"
+                            Placeholder="(Påkrævet) Beskriv kort hvad, hvor, hvornår?"
+                            BackgroundColor="Transparent"
+                            HorizontalOptions="Fill"
+                            VerticalOptions="FillAndExpand"
+                            VerticalTextAlignment="Start"
+                            Focused="Entry_Focused"
+                            Unfocused="Entry_Unfocused">
+                            <Editor.Behaviors>
+                                <toolkit:TextValidationBehavior
                                 InvalidStyle="{StaticResource InvalidEntryStyle}"
                                 Flags="ValidateOnValueChanged"
                                 MinimumLength="1"/>
-                        </Editor.Behaviors>
-                    </Editor>
+                            </Editor.Behaviors>
+                        </Editor>
+                    </Frame>
                 </ScrollView>
 
                 <Label
                     Text="Adresse:"
                     SemanticProperties.HeadingLevel="Level2"
-                    FontSize="Title" />
+                    FontAttributes="Bold"
+                    FontSize="20"
+                    Margin="0,5,0,0"/>
 
-                <Entry
-                    Keyboard="Text"
-                    FontSize="Body"
-                    Text="{Binding Path=Message.Address}"
-                    Placeholder="(Påkrævet) Hvor sker det?">
-                    <Entry.Behaviors>
-                        <toolkit:TextValidationBehavior
+                <Frame
+                    BackgroundColor="{StaticResource Gray200}"
+                    Padding="0">
+                    <Entry
+                        x:Name="AdressEntry"
+                        Keyboard="Text"
+                        Text="{Binding Path=Message.Address}"
+                        Placeholder="(Påkrævet) Hvor sker det?"
+                        Focused="Entry_Focused"
+                        Unfocused="Entry_Unfocused"
+                        toolkit:SetFocusOnEntryCompletedBehavior.NextElement="{x:Reference PhoneNumberEntry}"
+                        ReturnType="Next">
+                        <Entry.Behaviors>
+                            <toolkit:TextValidationBehavior
                             InvalidStyle="{StaticResource InvalidEntryStyle}"
                             Flags="ValidateOnValueChanged"
                             MinimumLength="1"/>
-                    </Entry.Behaviors>
-                </Entry>
+                        </Entry.Behaviors>
+                    </Entry>
+                </Frame>
 
                 <Label
                     Text="Kontakt Nummer:"
                     SemanticProperties.HeadingLevel="Level2"
-                    FontSize="Title" />
+                    FontAttributes="Bold"
+                    FontSize="20"
+                    Margin="0,5,0,0"/>
 
-                <Entry
-                    Keyboard="Telephone"
-                    FontSize="Body"
-                    Text="{Binding Path=Message.ReplyPhoneNumber}"
-                    Placeholder="(Ikke påkrævet) Nummer vi kan kontakte dig på.">
-                    <Entry.Behaviors>
-                        <toolkit:MaskedBehavior Mask="XXXXXXXX"/>
-                    </Entry.Behaviors>
-                </Entry>
+                <Frame
+                    BackgroundColor="{StaticResource Gray200}"
+                    Padding="0">
+                    <Entry
+                        x:Name="PhoneNumberEntry"
+                        Keyboard="Telephone"
+                        Text="{Binding Path=Message.ReplyPhoneNumber}"
+                        Focused="Entry_Focused"
+                        Unfocused="Entry_Unfocused"
+                        Placeholder="(Ikke påkrævet) Nummer vi kan kontakte dig på."
+                        toolkit:SetFocusOnEntryCompletedBehavior.NextElement="{x:Reference EmailEntry}"
+                        ReturnType="Next">
+                        <Entry.Behaviors>
+                            <toolkit:MaskedBehavior Mask="XXXXXXXX"/>
+                        </Entry.Behaviors>
+                    </Entry>
+                </Frame>
 
                 <Label
                     Text="Kontakt Email:"
                     SemanticProperties.HeadingLevel="Level2"
-                    FontSize="Title" />
+                    FontAttributes="Bold"
+                    FontSize="20"
+                    Margin="0,5,0,0"/>
 
-                <Entry
-                    Keyboard="Email"
-                    FontSize="Body"
-                    Text="{Binding Path=Message.ReplyMail}"
-                    Placeholder="(Ikke påkrævet) Mail vi kan kontakte dig på.">
-                    <Entry.Behaviors>
-                        <toolkit:EmailValidationBehavior
+                <Frame
+                    BackgroundColor="{StaticResource Gray200}"
+                    Padding="0">
+                    <Entry
+                        x:Name="EmailEntry"
+                        Keyboard="Email"
+                        Text="{Binding Path=Message.ReplyMail}"
+                        Placeholder="(Ikke påkrævet) Mail vi kan kontakte dig på."
+                        Focused="Entry_Focused"
+                        Unfocused="Entry_Unfocused"
+                        ReturnType="Done">
+                        <Entry.Behaviors>
+                            <toolkit:EmailValidationBehavior
                             InvalidStyle="{StaticResource InvalidEntryStyle}"
                             ValidStyle="{StaticResource ValidEntryStyle}"
                             Flags="ValidateOnValueChanged"/>
-                    </Entry.Behaviors>
-                </Entry>
+                        </Entry.Behaviors>
+                    </Entry>
+                </Frame>
+
+                <Grid
+                    ColumnDefinitions="*,*,*,*"
+                    RowDefinitions="*"
+                    ColumnSpacing="5"
+                    Margin="0,10,0,0"
+                    IsVisible="{OnPlatform Android=true, WinUI=true, iOS=false, MacCatalyst=false}">
+
+                    <Button
+                        x:Name="AddPhotosAndVideosOnAndroidButton"
+                        ImageSource="photo_film_solid"
+                        Grid.Column="0"
+                        Grid.Row="0"
+                        HeightRequest="40"
+                        Command="{Binding AddFilesAsyncCommand}"
+                        IsEnabled="{Binding IsNotBusy}"/>
+
+                    <Button
+                        x:Name="TakePictureButtonAndroid"
+                        ImageSource="camera_solid"
+                        Grid.Column="1"
+                        Grid.Row="0"
+                        HeightRequest="40"
+                        Command="{Binding TakePhotoAsyncCommand}"
+                        IsEnabled="{Binding IsNotBusy}"/>
+
+                    <Button
+                        x:Name="RecordVideoButtonAndroid"
+                        ImageSource="video_solid"
+                        Grid.Column="2"
+                        Grid.Row="0"
+                        HeightRequest="40"
+                        Command="{Binding RecordVideoAsyncCommand}"
+                        IsEnabled="{Binding IsNotBusy}"/>
+
+                    <Button
+                        x:Name="SendTipButtonAndroid"
+                        ImageSource="paper_plane_solid"
+                        Grid.Row="0"
+                        Grid.Column="3"
+                        HeightRequest="40"
+                        Command="{Binding SendTipAsyncCommand}"
+                        IsEnabled="{Binding IsNotBusy}"/>
+                </Grid>
+
+                <Grid
+                    ColumnDefinitions="*,*,*,*,*"
+                    RowDefinitions="*"
+                    ColumnSpacing="5"
+                    Margin="0,10,0,0"
+                    IsVisible="{OnPlatform iOS=true, MacCatalyst=true, Android=false, WinUI=false}">
+
+                    <Button
+                        x:Name="AddPhotoOnIOSButton"
+                        ImageSource="image_solid"
+                        Grid.Column="0"
+                        Grid.Row="0"
+                        HeightRequest="40"
+                        Command="{Binding AddPhotoAsyncCommand}"
+                        IsEnabled="{Binding IsNotBusy}"/>
+
+                    <Button
+                        x:Name="AddVideoOnIOSButton"
+                        ImageSource="film_solid"
+                        Grid.Column="1"
+                        Grid.Row="0"
+                        HeightRequest="40"
+                        Command="{Binding AddVideoAsyncCommand}"
+                        IsEnabled="{Binding IsNotBusy}"/>
+
+                    <Button
+                        x:Name="TakePictureButtonIOS"
+                        ImageSource="camera_solid"
+                        Grid.Column="2"
+                        Grid.Row="0"
+                        HeightRequest="40"
+                        Command="{Binding TakePhotoAsyncCommand}"
+                        IsEnabled="{Binding IsNotBusy}"/>
+
+                    <Button
+                        x:Name="RecordVideoButtonIOS"
+                        ImageSource="video_solid"
+                        Grid.Column="3"
+                        Grid.Row="0"
+                        HeightRequest="40"
+                        Command="{Binding RecordVideoAsyncCommand}"
+                        IsEnabled="{Binding IsNotBusy}"/>
+
+                    <Button
+                        x:Name="SendTipButtonIOS"
+                        ImageSource="paper_plane_solid"
+                        Grid.Row="0"
+                        Grid.Column="4"
+                        HeightRequest="40"
+                        Command="{Binding SendTipAsyncCommand}"
+                        IsEnabled="{Binding IsNotBusy}"/>
+                </Grid>
 
                 <Label
                     Text="Vedhæftede filer:"
                     SemanticProperties.HeadingLevel="Level2"
-                    FontSize="Title"/>
+                    FontAttributes="Bold"
+                    FontSize="20"
+                    Margin="0,5,0,0" />
 
-                <ListView
-                    SelectionMode="None"
-                    MinimumHeightRequest="100"
-                    MaximumHeightRequest="100"
-                    VerticalOptions="Fill"
-                    HorizontalOptions="Fill"
-                    ItemsSource="{Binding Files}"/>
 
-                <Button
-                    Text="Tilføj Billeder/Videoer"
-                    FontSize="18"
-                    HorizontalOptions="Fill"
-                    Command="{Binding AddFilesAsyncCommand}"
-                    IsVisible="{OnPlatform iOS=false, Android=true, WinUI=true}"/>
+                <CollectionView ItemsSource="{Binding MediaToUploads}"
+                                MinimumHeightRequest="100"
+                                MaximumHeightRequest="250"
+                                VerticalOptions="FillAndExpand"
+                                HorizontalOptions="Fill"
+                                SelectionMode="None">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:MediaToUpload">
+                            <Grid Padding="10">
+                                <Frame BackgroundColor="Transparent"
+                                       WidthRequest="250"
+                                       HeightRequest="250"
+                                       Padding="0">
+                                    <Grid Padding="0">
 
-                <Grid
-                    ColumnDefinitions="*,*"
-                    RowDefinitions="*"
-                    ColumnSpacing="5">
+                                        <Image Aspect="AspectFill"
+                                               Source="{Binding ImageFilePath}"
+                                               WidthRequest="250"/>
 
-                    <Button
-                        Text="Tilføj Billede"
-                        Grid.Column="0"
-                        Grid.Row="0"
-                        FontSize="18"
-                        HorizontalOptions="Fill"
-                        Command="{Binding AddPhotoAsyncCommand}"
-                        IsVisible="{OnPlatform iOS=true, Android=false, WinUI=false}"/>
+                                        <ImageButton Source="square_xmark_solid"
+                                                     WidthRequest="25"
+                                                     HeightRequest="25"
+                                                     HorizontalOptions="End"
+                                                     VerticalOptions="Start"
+                                                     Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:SendTipViewModel}}, Path=RemoveMediaFileAsyncCommand}"
+                                                     CommandParameter="{Binding FileName}">
+                                            <ImageButton.Behaviors>
+                                                <toolkit:IconTintColorBehavior TintColor="Red"/>
+                                            </ImageButton.Behaviors>
+                                        </ImageButton>
 
-                    <Button
-                        Text="Tilføj Video"
-                        Grid.Column="1"
-                        Grid.Row="0"
-                        FontSize="18"
-                        HorizontalOptions="Fill"
-                        Command="{Binding AddVideoAsyncCommand}"
-                        IsVisible="{OnPlatform iOS=true, Android=false, WinUI=false}"/>
-                
-                </Grid>
-
-                <Grid
-                    ColumnDefinitions="*,*"
-                    RowDefinitions="*"
-                    ColumnSpacing="5">
-
-                    <Button
-                        Text="Tag Billede"
-                        FontSize="18"
-                        Grid.Column="0"
-                        Grid.Row="0"
-                        HorizontalOptions="Fill"
-                        Command="{Binding TakePhotoAsyncCommand}"
-                        IsVisible="{OnPlatform iOS=true, Android=true, WinUI=false}"/>
-
-                    <Button
-                        Text="Optag Video"
-                        FontSize="18"
-                        Grid.Column="1"
-                        Grid.Row="0"
-                        HorizontalOptions="Fill"
-                        Command="{Binding RecordVideoAsyncCommand}"
-                        IsVisible="{OnPlatform iOS=true, Android=true, WinUI=false}"/>
-
-                </Grid>
-                
-                <Button
-                    Text="Send Tip"
-                    FontSize="18"
-                    HorizontalOptions="Fill"
-                    Command="{Binding SendTipAsyncCommand}"/>
-
+                                    </Grid>
+                                </Frame>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
             </VerticalStackLayout>
         </ScrollView>
 
