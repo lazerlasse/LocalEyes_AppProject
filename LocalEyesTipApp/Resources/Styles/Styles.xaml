@@ -375,26 +375,6 @@
         <Setter Property="Shell.FlyoutBackgroundColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray500}}" />
     </Style>
 
-    <Style x:Key="iosTabbarIconsStyle" TargetType="Tab">
-        <Style.Triggers>
-            <Trigger TargetType="Tab" Property="IsChecked" Value="True">
-                <Setter Property="Icon">
-                    <Setter.Value>
-                        <FontImageSource Color="{StaticResource Gray950}" />
-                    </Setter.Value>
-                </Setter>
-            </Trigger>
-            <Trigger TargetType="Tab" Property="IsChecked" Value="False">
-                <Setter Property="Icon">
-                    <Setter.Value>
-                        <FontImageSource Color="{StaticResource White}" />
-                    </Setter.Value>
-                </Setter>
-            </Trigger>
-        </Style.Triggers>
-    </Style>
-
-
     <Style TargetType="NavigationPage">
         <Setter Property="BarBackgroundColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}" />
         <Setter Property="BarTextColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray100}}" />

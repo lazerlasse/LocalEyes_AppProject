@@ -101,7 +101,7 @@
 		<RuntimeIdentifier>ios-arm64</RuntimeIdentifier>
 		<!-- Only needed when you have a need for entitlements -->
 		<!--<CodesignEntitlement>Entitlements.plist</CodesignEntitlement>-->
-		<CodesignKey>Apple Distribution: Lasse Antonsen (2KKRDW599H)</CodesignKey>
+		<CodesignKey>iPhone Distribution: Lasse Antonsen (2KKRDW599H)</CodesignKey>
 		<CodesignProvision>LocalEyesAppSigning</CodesignProvision>
 	</PropertyGroup>
 
