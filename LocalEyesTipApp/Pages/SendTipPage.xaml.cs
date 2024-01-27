@@ -29,7 +29,7 @@ public partial class SendTipPage : ContentPage
 
         if (!await PermissionsChecker.CheckPermissions())
         {
-            await Shell.Current.DisplayAlert("Manglende tilladelser!", "Nogle af de påkrævede tilladelser mangler. For at benytte tip funktionen skal disse tilladelser manuelt accepteres!", "Ok");
+            await Shell.Current.DisplayAlert("Manglende tilladelser!", "Nogle af de påkrævede tilladelser mangler. For at benytte tip funktionen skal disse tilladelser manuelt accepteres under indstillinger i din tlf!", "Ok");
         }
     }
 

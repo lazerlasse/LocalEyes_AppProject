@@ -31,8 +31,9 @@ namespace LocalEyesTipApp
 
             // Add Pages...
             builder.Services.AddSingleton<LatestNewsPage>();
-            builder.Services.AddSingleton<AboutPage>();
             builder.Services.AddTransient<SendTipPage>();
+            builder.Services.AddSingleton<AboutPage>();
+            builder.Services.AddSingleton<FireCallsFrom112Page>();
 
             return builder.Build();
         }

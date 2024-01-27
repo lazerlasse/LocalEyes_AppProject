@@ -20,7 +20,7 @@
 
 		<!-- Versions -->
 		<ApplicationDisplayVersion>2.0.0</ApplicationDisplayVersion>
-		<ApplicationVersion>20</ApplicationVersion>
+		<ApplicationVersion>21</ApplicationVersion>
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">14.0</SupportedOSPlatformVersion>
@@ -43,6 +43,7 @@
 		<MauiImage Update="Resources\Images\comment_dots_solid.svg" BaseSize="28,28" />
 		<MauiImage Update="Resources\Images\circle_info_solid.svg" BaseSize="28,28" />
 		<MauiImage Update="Resources\Images\envelope_solid.svg" BaseSize="28,28" />
+		<MauiImage Update="Resources\Images\fire_solid.svg" BaseSize="28,28" />
 		<MauiImage Update="Resources\Images\localeyes_topmenubar_logo.png" BaseSize="28,28" />
 		<MauiImage Update="Resources\Images\photo_film_solid.svg" BaseSize="28,28" TintColor="#E1E1E1" />
 		<MauiImage Update="Resources\Images\image_solid.svg" BaseSize="28,28" TintColor="#E1E1E1" />
@@ -88,6 +89,9 @@
 	<ItemGroup>
 		<MauiXaml Update="Pages\AboutPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Pages\FireCallsFrom112Page.xaml">
+		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Pages\LatestNewsPage.xaml">
 			<Generator>MSBuild:Compile</Generator>

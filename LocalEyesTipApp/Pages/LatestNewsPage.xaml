@@ -7,22 +7,6 @@
              x:DataType="local:LatestNewsPage"
              Title="Local Eyes Nyheder">
 
-    <!--<Shell.TitleView>
-        <HorizontalStackLayout Spacing="10">
-            <Image Source="localeyes_transparent_logo"
-                   HeightRequest="25"
-                   WidthRequest="25"/>
-            
-            <Label Text="Local Eyes - Senest Nyt"
-                   TextColor="White"
-                   HeightRequest="50"
-                   VerticalTextAlignment="Center"
-                   VerticalOptions="CenterAndExpand"
-                   FontSize="Title"
-                   FontAttributes="Bold"/>
-        </HorizontalStackLayout>
-    </Shell.TitleView>-->
-
     <Grid
         RowDefinitions="Auto,*,Auto"
         ColumnDefinitions="*"

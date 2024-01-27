@@ -9,15 +9,23 @@
     <TabBar>
         <Tab Title="Seneste Nyt"
              Icon="square_rss_solid">
-            <ShellContent ContentTemplate="{DataTemplate pages:LatestNewsPage}"/>
+            <ShellContent ContentTemplate="{DataTemplate pages:LatestNewsPage}"
+                          Route="LatestNewsPage"/>
         </Tab>
         <Tab Title="Tip os"
              Icon="comment_dots_solid">
-            <ShellContent ContentTemplate="{DataTemplate pages:SendTipPage}"/>
+            <ShellContent ContentTemplate="{DataTemplate pages:SendTipPage}"
+                          Route="SendTipPage"/>
+        </Tab>
+        <Tab Title="112 Puls"
+             Icon="fire_solid">
+            <ShellContent ContentTemplate="{DataTemplate pages:FireCallsFrom112Page}"
+                          Route="FireCallsFrom112Page"/>
         </Tab>
         <Tab Title="Om Appen"
              Icon="circle_info_solid">
-            <ShellContent ContentTemplate="{DataTemplate pages:AboutPage}"/>
+            <ShellContent ContentTemplate="{DataTemplate pages:AboutPage}"
+                          Route="AboutPage"/>
         </Tab>
     </TabBar>
 </Shell>

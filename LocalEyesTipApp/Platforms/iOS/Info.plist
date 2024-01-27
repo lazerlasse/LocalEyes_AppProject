@@ -26,6 +26,21 @@
 			<string>UIInterfaceOrientationLandscapeLeft</string>
 			<string>UIInterfaceOrientationLandscapeRight</string>
 		</array>
+		<key>NSAppTransportSecurity</key>
+		<dict>
+			<key>NSExceptionDomains</key>
+			<dict>
+				<key>http://www.odin.dk/112puls/</key>
+				<dict>
+					<key>NSIncludesSubdomains</key>
+					<false/>
+					<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+					<true/>
+					<key>NSTemporaryExceptionMinimumTLSVersion</key>
+					<string>TLSv1.1</string>
+				</dict>
+			</dict>
+		</dict>
 		<key>XSAppIconAssets</key>
 		<string>Assets.xcassets/appicon.appiconset</string>
 		<key>NSCameraUsageDescription</key>

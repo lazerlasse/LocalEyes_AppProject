@@ -37,7 +37,10 @@ public partial class SendTipViewModel : BaseViewModel
         if (!userInputIsValid)
             return;
 
-        await Shell.Current.DisplayAlert("Send tip:", "Du er ved at sende dit tip til os. Bemærk dog at hvis du har vedhæftet filer, så kan det tage noget tid at sende dit tip! Hav derfor tolmodighed og forlad ikke appen før overførslen er fuldført! Tryk ok for at fortsætte...", "OK");
+        bool sendOrCancelResult = await Shell.Current.DisplayAlert("Send tip:", "Du er ved at sende dit tip til os. Bemærk dog at hvis du har vedhæftet filer, så kan det tage noget tid at sende dit tip! Hav derfor tolmodighed og forlad ikke appen før overførslen er fuldført! Tryk ok for at fortsætte eller fortryd for at vende tilbage...", "OK", "Fortryd");
+
+        if (sendOrCancelResult is false)
+            return;
 
         IsBusy = true;
 
@@ -50,7 +53,7 @@ public partial class SendTipViewModel : BaseViewModel
         if (result.Succeded)
         {
             await Shell.Current.DisplayAlert("Beskeden blev sendt", "Tak for din henvendelse. Beskeden er nu sendt til vores fotografer.", "Ok");
-            await Shell.Current.GoToAsync("..");
+            await Shell.Current.GoToAsync("../LatestNewsPage");
         }
         else
         {
@@ -59,7 +62,7 @@ public partial class SendTipViewModel : BaseViewModel
             if (answer)
                 return;
 
-            await Shell.Current.GoToAsync("..");
+            await Shell.Current.GoToAsync("../LatestNewsPage");
         }
     }
 
@@ -88,7 +91,8 @@ public partial class SendTipViewModel : BaseViewModel
         catch (Exception ex)
         {
             Debug.WriteLine("Der opstod en uventet fejl: ", ex.Message);
-            await Shell.Current.DisplayAlert("Der opstod en uventet fejl!", "Forsøg venligst igen, eller kontakt udvikleren hvis problemet fortsætter!", "Ok");
+            await Shell.Current.DisplayAlert("Der opstod en uventet fejl!",
+                    "Der opstod en fejl som kan skyldes en fejl i adgangsrettighederne til dit galleri. Tjek eventuelt under indstillinger og tilladelser for appen, om alle krævede tilladelser er givet og forsøg igen. Kontakt venligst udvikleren hvis problemet fortsætter!", "Ok");
             return;
         }
     }
@@ -115,7 +119,8 @@ public partial class SendTipViewModel : BaseViewModel
         catch (Exception ex)
         {
             Debug.WriteLine("Der opstod en uventet fejl: ", ex.Message);
-            await Shell.Current.DisplayAlert("Der opstod en uventet fejl!", "Forsøg venligst igen, eller kontakt udvikleren hvis problemet fortsætter!", "Ok");
+            await Shell.Current.DisplayAlert("Der opstod en uventet fejl!",
+                    "Der opstod en fejl som kan skyldes en fejl i adgangsrettighederne til dit galleri. Tjek eventuelt under indstillinger og tilladelser for appen, om alle krævede tilladelser er givet og forsøg igen. Kontakt venligst udvikleren hvis problemet fortsætter!", "Ok");
             return;
         }
     }
@@ -142,7 +147,8 @@ public partial class SendTipViewModel : BaseViewModel
         catch (Exception ex)
         {
             Debug.WriteLine("Der opstod en uventet fejl: ", ex.Message);
-            await Shell.Current.DisplayAlert("Der opstod en uventet fejl!", "Forsøg venligst igen, eller kontakt udvikleren hvis problemet fortsætter!", "Ok");
+            await Shell.Current.DisplayAlert("Der opstod en uventet fejl!",
+                    "Der opstod en fejl som kan skyldes en fejl i adgangsrettighederne til dit galleri. Tjek eventuelt under indstillinger og tilladelser for appen, om alle krævede tilladelser er givet og forsøg igen. Kontakt venligst udvikleren hvis problemet fortsætter!", "Ok");
             return;
         }
     }
@@ -166,7 +172,8 @@ public partial class SendTipViewModel : BaseViewModel
             catch (Exception ex)
             {
                 Debug.WriteLine("Der opstod en uventet fejl: ", ex.Message);
-                await Shell.Current.DisplayAlert("Der opstod en uventet fejl!", "Forsøg venligst igen, eller kontakt udvikleren hvis problemet fortsætter!", "Ok");
+                await Shell.Current.DisplayAlert("Der opstod en uventet fejl!",
+                    "Der opstod en fejl som kan skyldes en fejl i adgangsrettighederne til dit galleri/kamera. Tjek eventuelt under indstillinger og tilladelser for appen, om alle krævede tilladelser er givet og forsøg igen. Kontakt venligst udvikleren hvis problemet fortsætter!", "Ok");
                 return;
             }
         }
@@ -191,7 +198,8 @@ public partial class SendTipViewModel : BaseViewModel
             catch (Exception ex)
             {
                 Debug.WriteLine("Der opstod en uventet fejl: ", ex.Message);
-                await Shell.Current.DisplayAlert("Der opstod en uventet fejl!", "Forsøg venligst igen, eller kontakt udvikleren hvis problemet fortsætter!", "Ok");
+                await Shell.Current.DisplayAlert("Der opstod en uventet fejl!",
+                    "Der opstod en fejl som kan skyldes en fejl i adgangsrettighederne til dit galleri/kamera. Tjek eventuelt under indstillinger og tilladelser for appen, om alle krævede tilladelser er givet og forsøg igen. Kontakt venligst udvikleren hvis problemet fortsætter!", "Ok");
                 return;
             }
         }
