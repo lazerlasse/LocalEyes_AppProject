@@ -6,21 +6,24 @@
              xmlns:local="clr-namespace:LocalEyesTipApp.Pages"
              x:DataType="local:FireCallsFrom112Page"
              Title="112 Puls">
-    
-    <VerticalStackLayout Spacing="5" Margin="5">
 
-        <Label Text="Seneste meldinger fra 112" />
-
+    <Grid
+        ColumnDefinitions="*"
+        RowDefinitions="*">
+        
         <RefreshView
             Command="{Binding Path=RefreshCommand}"
             IsRefreshing="{Binding Path=IsRefreshing}">
 
             <WebView
                 x:Name="FireCallsFrom112WebView"
+                Grid.Column="0"
+                Grid.Row="0"
                 VerticalOptions="FillAndExpand"
                 HorizontalOptions="Fill"
                 MinimumHeightRequest="200"
                 MinimumWidthRequest="100"/>
-            </RefreshView>
-    </VerticalStackLayout>
+        </RefreshView>
+        
+    </Grid>
 </ContentPage>

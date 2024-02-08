@@ -1,55 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
+<dict>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>UIDeviceFamily</key>
+	<array>
+		<integer>1</integer>
+		<integer>2</integer>
+	</array>
+	<key>UIRequiredDeviceCapabilities</key>
+	<array>
+		<string>arm64</string>
+	</array>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>XSAppIconAssets</key>
+	<string>Assets.xcassets/appicon.appiconset</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Hvis du ønsker at tage et billede og vedhæfte dit tip til os, så skal du give tilladelse til at bruge dit kamera.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Hvis du ønsker at optage en video og vedhæfte dit tip til os, så skal du give tilladelse til at bruge din mikrofon.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Hvis du vil vedhæfte et billede eller video til dit tip, så skal du give tilladelse til at tilgå dit galleri.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Hvis du vil vedhæfte et billede eller video til dit tip, så skal du give tilladelse til at tilgå dit galleri.</string>
+	<key>NSAppTransportSecurity</key>
 	<dict>
-		<key>LSRequiresIPhoneOS</key>
-		<true/>
-		<key>UIDeviceFamily</key>
-		<array>
-			<integer>1</integer>
-			<integer>2</integer>
-		</array>
-		<key>UIRequiredDeviceCapabilities</key>
-		<array>
-			<string>arm64</string>
-		</array>
-		<key>UISupportedInterfaceOrientations</key>
-		<array>
-			<string>UIInterfaceOrientationPortrait</string>
-			<string>UIInterfaceOrientationLandscapeLeft</string>
-			<string>UIInterfaceOrientationLandscapeRight</string>
-		</array>
-		<key>UISupportedInterfaceOrientations~ipad</key>
-		<array>
-			<string>UIInterfaceOrientationPortrait</string>
-			<string>UIInterfaceOrientationPortraitUpsideDown</string>
-			<string>UIInterfaceOrientationLandscapeLeft</string>
-			<string>UIInterfaceOrientationLandscapeRight</string>
-		</array>
-		<key>NSAppTransportSecurity</key>
+		<key>NSExceptionDomains</key>
 		<dict>
-			<key>NSExceptionDomains</key>
+			<key>odin.dk</key>
 			<dict>
-				<key>http://www.odin.dk/112puls/</key>
-				<dict>
-					<key>NSIncludesSubdomains</key>
-					<false/>
-					<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
-					<true/>
-					<key>NSTemporaryExceptionMinimumTLSVersion</key>
-					<string>TLSv1.1</string>
-				</dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+				<key>NSIncludesSubdomains</key>
+				<true/>
 			</dict>
 		</dict>
-		<key>XSAppIconAssets</key>
-		<string>Assets.xcassets/appicon.appiconset</string>
-		<key>NSCameraUsageDescription</key>
-		<string>Hvis du ønsker at tage et billede og vedhæfte dit tip til os, så skal du give tilladelse til at bruge dit kamera.</string>
-		<key>NSMicrophoneUsageDescription</key>
-		<string>Hvis du ønsker at optage en video og vedhæfte dit tip til os, så skal du give tilladelse til at bruge din mikrofon.</string>
-		<key>NSPhotoLibraryAddUsageDescription</key>
-		<string>Hvis du vil vedhæfte et billede eller video til dit tip, så skal du give tilladelse til at tilgå dit galleri.</string>
-		<key>NSPhotoLibraryUsageDescription</key>
-		<string>Hvis du vil vedhæfte et billede eller video til dit tip, så skal du give tilladelse til at tilgå dit galleri.</string>
 	</dict>
+</dict>
 </plist>

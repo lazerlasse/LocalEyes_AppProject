@@ -25,6 +25,7 @@ public partial class FireCallsFrom112Page : ContentPage
             OnPropertyChanged(nameof(IsRefreshing));
         }
     }
+    
     void RefreshWebView()
     {
         if (IsBusy)
@@ -35,11 +36,12 @@ public partial class FireCallsFrom112Page : ContentPage
         IsBusy = false;
         IsRefreshing = false;
     }
+    
     async void Load112PulsWebSite()
     {
         if (Connectivity.Current.NetworkAccess == NetworkAccess.Internet)
         {
-            FireCallsFrom112WebView.Source = "http://www.odin.dk/112puls/";
+            FireCallsFrom112WebView.Source = "http://odin.dk/112puls/";
         }
         else
         {
