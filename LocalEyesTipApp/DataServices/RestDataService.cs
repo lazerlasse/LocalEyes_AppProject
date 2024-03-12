@@ -13,7 +13,7 @@ namespace LocalEyesTipApp.DataServices
             _httpClient = new HttpClient()
             {
                 BaseAddress = new Uri(_baseAddress),
-                Timeout = TimeSpan.FromMinutes(20)
+                Timeout = TimeSpan.FromMinutes(30)
             };
         }
 

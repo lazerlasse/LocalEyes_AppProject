@@ -4,8 +4,9 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:pages="clr-namespace:LocalEyesTipApp.Pages"
-    Shell.FlyoutBehavior="Disabled" >
+    Shell.FlyoutBehavior="Flyout" >
 
+    <!-- Buttom Tab Menu -->
     <TabBar>
         <Tab Title="Seneste Nyt"
              Icon="square_rss_solid">
@@ -26,6 +27,11 @@
              Icon="circle_info_solid">
             <ShellContent ContentTemplate="{DataTemplate pages:AboutPage}"
                           Route="AboutPage"/>
+        </Tab>
+        <Tab Title="Indstillinger"
+             Icon="gear_solid">
+            <ShellContent ContentTemplate="{DataTemplate pages:SettingsPage}"
+                          Route="SettingsPage"/>
         </Tab>
     </TabBar>
 </Shell>

@@ -28,12 +28,14 @@ namespace LocalEyesTipApp
 
             // Add View Models...
             builder.Services.AddTransient<SendTipViewModel>();
+            builder.Services.AddSingleton<SettingsViewModel>();
 
             // Add Pages...
             builder.Services.AddSingleton<LatestNewsPage>();
             builder.Services.AddTransient<SendTipPage>();
             builder.Services.AddSingleton<AboutPage>();
             builder.Services.AddSingleton<FireCallsFrom112Page>();
+            builder.Services.AddSingleton<SettingsPage>();
 
             return builder.Build();
         }

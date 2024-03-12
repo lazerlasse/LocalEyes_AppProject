@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LocalEyesTipApp.Pages.SettingsPage"
+             xmlns:local="clr-namespace:LocalEyesTipApp.Pages"
+             xmlns:viewmodel="clr-namespace:LocalEyesTipApp.ViewModels"
+             xmlns:model="clr-namespace:LocalEyesTipApp.Models"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:DataType="viewmodel:SettingsViewModel"
+             Title="Indstillinger">
+</ContentPage>
