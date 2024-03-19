@@ -100,7 +100,7 @@ namespace LocalEyesWebAPI.Controllers
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogError("Der opstod en uventet fejl i forsøget på at gemme PushoverApi i databasen: ", ex.Message);
+                    _logger.LogError(message: "Der opstod en uventet fejl i forsøget på at gemme PushoverApi i databasen: ", ex.Message);
 
                     // Unprotect key before return view.
                     pushoverSenderAPI.PushoverSenderAPIKey = _pushoverApiDataProtector.Unprotect(pushoverSenderAPI.PushoverSenderAPIKey);

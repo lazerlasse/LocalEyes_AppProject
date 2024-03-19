@@ -1,24 +1,30 @@
 version: '3.4'
- 
-networks:
-    myAppNetwork:       
- 
+
 services:
-    localeyesAppSqlServer1:
-        container_name: localeyesAppSqlServer
-        image: mcr.microsoft.com/mssql/server:2017-latest
-        ports:
-            - 8002:1433
-        environment:
-            - ACCEPT_EULA=Y
-            - MSSQL_SA_PASSWORD=myStong_Password123# 
-    WebApi:
-        container_name: WebApiContainer
-        image: ${DOCKER_REGISTRY-}webapisqlserverdockerdemo
-        ports:
-            - 8001:80 
-        build:
-          context: .
-          dockerfile: WebApiSqlServerDockerDemo/Dockerfile
-        depends_on:
-            - SqlServerDb
+    localeyesappsqlserver:
+      container_name: localeyesappsqlserver
+      image: mysql:latest
+      restart: always
+      environment:
+        MYSQL_ROOT_PASSWORD: tdi87269xsu+!
+        MYSQL_DATABASE: LocalEyesAppServiceDb
+        MYSQL_USER: localeyesapp
+        MYSQL_PASSWORD: tdi87269xsu+!
+      volumes:
+        - /var/lib/init_db/localeyes.sql:/docker-entrypoint-initdb.d/localeyes.sql
+
+    localeyesappwebapi:
+      image: fixitmedia/localeyeswebapi:latest
+      restart: always
+      ports:
+        - 5000:5000
+      environment:
+        - TZ=Europe/Copenhage
+        - MYSQL_HOST=localeyesappsqlserver
+        - MYSQL_PORT=3306
+        - MYSQL_USER=localeyesapp
+        - MYSQL_PASSWORD=tdi87269xsu+!
+        - MYSQL_NAME=LocalEyesAppServiceDb
+
+      links:
+        - localeyesappsqlserver

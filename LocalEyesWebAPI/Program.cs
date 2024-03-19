@@ -35,10 +35,6 @@ SqlConnectionStringBuilder mySqlconnection = new(
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseMySql(mySqlconnection.ConnectionString, ServerVersion.AutoDetect(mySqlconnection.ConnectionString)));
 
-// ExeptionHandler for database related error. (Skal fjernes i produktion!!!)
-builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-
-
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultUI()
@@ -103,6 +99,7 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseMigrationsEndPoint();
+    app.UseDeveloperExceptionPage();
 }
 else
 {
